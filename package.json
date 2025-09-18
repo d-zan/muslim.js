@@ -4,15 +4,13 @@
   "description": "Is node.js package create for who wants know about Islamic",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "keywords": [],
   "author": " Discord: dz0. ",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^18.0.6",
-    "axios": "^1.8.1",
-    "chalk": "^4.1.2",
     "node-fetch": "^3.3.2"
   }
 }

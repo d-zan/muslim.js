@@ -46,20 +46,20 @@ export interface MethodNumber {
   //(also requires shafaq parameter)
   "Moonsighting Committee Worldwide": 15;
   Dubai: 16;
-  //(JAKIM)
+  /**(JAKIM)*/
   "Jabatan Kemajuan Islam Malaysia": 17;
   Tunisia: 18;
   Algeria: 19;
-  //KEMENAG
+  /**KEMENAG*/
   "Kementerian Agama Republik Indonesia": 20;
   Morocco: 21;
   "Comunidade Islamica de Lisboa": 22;
   "Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan": 23;
-  //See https://aladhan.com/calculation-methods
+  /**See https://aladhan.com/calculation-methods*/
   Custom: 99;
 }
 /**
-*! 0 - Jafari / Shia Ithna-Ashari
+*!0 - Jafari / Shia Ithna-Ashari
 *!1 - University of Islamic Sciences, Karachi
 *!2 - Islamic Society of North America
 *!3 - Muslim World League

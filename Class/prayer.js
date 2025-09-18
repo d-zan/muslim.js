@@ -32,11 +32,17 @@ class Prayer {
     if (country.length !== 2)
       throw new PrayerError("Country option length must be 2");
     if (!method) throw new PrayerError("Method option is require");
-    const axi =  axios.get("https://api.aladhan.com/v1/methods");
-    const name = getMethodName(this.method);
-    const method2 =  axi.data.data[name];
-    const latitude =  method2.location.latitude;
-    const longitude =  method2.location.longitude;
+    let name = ''
+    let method2;
+    let latitude;
+    let longitude;
+    
+   axios.get("https://api.aladhan.com/v1/methods").then(axi=>{
+       name = getMethodName(this.method);
+       method2 =  axi.data.data[name];
+       latitude =  method2.location.latitude;
+       longitude =  method2.location.longitude;
+    });
     this.method = getMethodNumber[method];
     this.city = city;
     this.country = country;
@@ -152,9 +158,7 @@ if (hours < hoursN || (hours === hoursN && minutes > minuteN)) {
     }
     */
     const now = new Date();
-    const h = `${now.getUTCDate()}-${
-      now.getMonth() + 1
-    }-${now.getUTCFullYear()}`;
+    const h = `${now.getUTCDate()}-${now.getMonth() + 1}-${now.getUTCFullYear()}`;
 
     const api = `https://api.aladhan.com/v1/nextPrayerByAddress/${h}?address=${this.city}%2C+${this.country}&method=${this.method}`;
 

@@ -1,11 +1,12 @@
 //const { converttoAMPM } = require('./JS/JS');
-
+/*
 const Prayer = require('./Class/prayer');
 const converttoAMPM = require('./Function/converttoAMPM');
-const axios  = require("axios");
+//const axios  = require("axios");
 const getMethodNumber = require('./Function/getMethodNumber');
 const Hijri = require('./Class/Hijri');
-const MethodName = require('./JS/MethodName');
+const MethodName = require('./JS/MethodName');*/
+//const fetch = require('node-fetch');
 /*const { API_URL } = require('./JSON/bot.json');
 async function name() {
     if (!ax) return console.log("A7A")
@@ -24,9 +25,9 @@ async function name() {
    // const ax = await axios.get('https://api.aladhan.com/v1/gToHCalendar/2/2025');
 //ax.data
     ///console.log(ax.data.data);    
-     const axi = await axios.get('https://api.aladhan.com/v1/methods');
+     const res = await fetch('https://api.aladhan.com/v1/nextHijriHoliday');
         //const method = await axi.data.data['EGYPT'].id;
-    const prayer = new Prayer('Cairo','EG','Egyptian General Authority of Survey')
+    //const prayer = new Prayer('Cairo','EG','Egyptian General Authority of Survey')
     /*
     const name = MethodName[5];
         const method = await axi.data.data[name];
@@ -36,6 +37,41 @@ async function name() {
         const ax = await axios.get(api);
         */
 
-    console.log((await prayer.getNextPrayTime()))
+    //console.log((await prayer.getNextPrayTime()))
+    const json = await res.json()
+    console.log(await json.data)
+    /**
+    
+    {
+  hijri: {
+    date: '03-06-1447',
+    format: 'DD-MM-YYYY',
+    day: '3',
+    weekday: { en: 'Al Athnayn', ar: 'الاثنين' },
+    month: {
+      number: 6,
+      en: 'Jumādá al-ākhirah',
+      ar: 'جُمادى الآخرة',
+      days: 29
+    },
+    year: '1447',
+    designation: { abbreviated: 'AH', expanded: 'Anno Hegirae' },
+    holidays: [ 'Urs of Mawlānā Shaykh Hishām Kabbāni (ق' ],
+    adjustedHolidays: [],
+    method: 'HJCoSA'
+  },
+  gregorian: {
+    date: '24-11-2025',
+    format: 'DD-MM-YYYY',
+    day: '24',
+    weekday: { en: 'Monday' },
+    month: { number: 11, en: 'November' },
+    year: '2025',
+    designation: { abbreviated: 'AD', expanded: 'Anno Domini' },
+    lunarSighting: false
+  }
+}
+
+    */
 }
 name()
