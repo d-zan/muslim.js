@@ -1,10 +1,11 @@
 //const { converttoAMPM } = require('./JS/JS');
+const AsmaAllahHusna = require('./Class/asmaAllahHusna');
+const Hijri = require('./Class/Hijri');
 /*
 const Prayer = require('./Class/prayer');
 const converttoAMPM = require('./Function/converttoAMPM');
 //const axios  = require("axios");
 const getMethodNumber = require('./Function/getMethodNumber');
-const Hijri = require('./Class/Hijri');
 const MethodName = require('./JS/MethodName');*/
 //const fetch = require('node-fetch');
 /*const { API_URL } = require('./JSON/bot.json');
@@ -21,14 +22,18 @@ const now = new Date();
 }*/
 async function name() {
     //const egPrayer = new Prayer('Cairo','EG','Egyptian General Authority of Survey');
-    //const data = await egPrayer.getAllPrayTime();
-   // const ax = await axios.get('https://api.aladhan.com/v1/gToHCalendar/2/2025');
-//ax.data
+   //const data = await egPrayer.getAllPrayTime();
+  // const ax = await axios.get('https://api.aladhan.com/v1/gToHCalendar/2/2025');
+ //ax.data
     ///console.log(ax.data.data);    
-     const res = await fetch('https://api.aladhan.com/v1/nextHijriHoliday');
+     //const res = await fetch('https://api.aladhan.com/v1/islamicMonths');
         //const method = await axi.data.data['EGYPT'].id;
     //const prayer = new Prayer('Cairo','EG','Egyptian General Authority of Survey')
-    /*
+  const hijri = new Hijri();
+  const data1 = await hijri.islamicMonths.all();
+  const data2 = await hijri.islamicMonths.get(1)
+  // 1977-4-25  
+  /*
     const name = MethodName[5];
         const method = await axi.data.data[name];
         const latitude = await method.location.latitude;
@@ -36,10 +41,13 @@ async function name() {
         const api = `https://api.aladhan.com/v1/nextPrayer/26-03-2025?latitude=${latitude}&longitude=${longitude}`;
         const ax = await axios.get(api);
         */
-
+    //const now = new Date();
+    //const h = `${now.getUTCDate()}-${now.getMonth() + 1}-${now.getFullYear()}`;
     //console.log((await prayer.getNextPrayTime()))
-    const json = await res.json()
-    console.log(await json.data)
+    //const json = await res.json()
+   // const c = await json.data//.map(e=>e.gregorian)
+///console.log(await data1);
+   console.log(await data2);
     /**
     
     {

@@ -5,17 +5,19 @@ class AladhanAPIError extends Error {
   }
 }
 /**
- * Get the 99 beautiful names of Allah, in English and Arabic.
+ * The 99 names of Allah, in English and Arabic.
  */
 class AsmaAllahHusna {
   /**
    * Get all the Asma Allah Husna - Returns the Arabic text with transliteration and meaning of each name
-   * @returns {Promise<import("../types/index").AsmaAllahHusna>}
+   * @returns {Promise<import("../types/index").AsmaAllahHusna[]>}
    */
   async all() {
-    const ax = await axios.get("https://api.aladhan.com/v1/asmaAlHusna");
-    const data = ax.data;
-    return data;
+    const api = "https://api.aladhan.com/v1/asmaAlHusna"
+    const data = await fetch(api);
+    if (!data.ok) throw new AladhanAPIError(`[${data.status}]: ${data.statusText}`);
+    const json = await data.json();
+    return await json.data;
   }
   /**
    * Returns the Arabic text with transliteration and meaning
@@ -23,17 +25,16 @@ class AsmaAllahHusna {
    * @returns {Promise<import("../types/index").AsmaAllahHusna>}
    */
   async byNumber(number) {
-    const ax = await axios.get(
-      `https://api.aladhan.com/v1/asmaAlHusna/${number}`
-    );
-    try {
-        const data = ax.data;
-        return data;
-    } catch (error) {
-        if (error.code === 404) {
-            throw AladhanAPIError("[NOT_FOUND]: Please specify a valid number or list of comma separated numbers between 1 and 99")
+    const api = `https://api.aladhan.com/v1/asmaAlHusna`//`https://api.aladhan.com/v1/asmaAlHusna/${number}`
+
+        const data = await fetch(api);
+        const json = await data.json();
+        if (data.status === 404) {
+          throw new AladhanAPIError("[NOT_FOUND]: Please specify a valid number or list of comma separated numbers between 1 and 99")
         }
-    }
+        if (!data.ok) throw new AladhanAPIError(`[${data.status}]: ${data.statusText}`);
+    return await json.data[number - 1];
+
   }
 }
 module.exports = AsmaAllahHusna

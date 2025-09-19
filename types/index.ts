@@ -37,26 +37,26 @@ export interface MethodNumber {
   "Egyptian General Authority of Survey": 5;
   "Institute of Geophysics, University of Tehran": 7;
   "Gulf Region": 8;
-  Kuwait: 9;
-  Qatar: 10;
+  'Kuwait': 9;
+  'Qatar': 10;
   "Majlis Ugama Islam Singapura, Singapore": 11;
   "Union Organization islamic de France": 12;
   "Diyanet İşleri Başkanlığı, Turkey": 13;
   "Spiritual Administration of Muslims of Russia": 14;
   //(also requires shafaq parameter)
   "Moonsighting Committee Worldwide": 15;
-  Dubai: 16;
+  'Dubai': 16;
   /**(JAKIM)*/
   "Jabatan Kemajuan Islam Malaysia": 17;
-  Tunisia: 18;
-  Algeria: 19;
+  'Tunisia': 18;
+  'Algeria': 19;
   /**KEMENAG*/
   "Kementerian Agama Republik Indonesia": 20;
-  Morocco: 21;
+  'Morocco': 21;
   "Comunidade Islamica de Lisboa": 22;
   "Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan": 23;
   /**See https://aladhan.com/calculation-methods*/
-  Custom: 99;
+  'Custom': 99;
 }
 /**
 *!0 - Jafari / Shia Ithna-Ashari
@@ -82,7 +82,7 @@ export interface MethodNumber {
 *!21 - Morocco
 *!22 - Comunidade Islamica de Lisboa
 *!23 - Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan
-99 - Custom. See https://aladhan.com/calculation-methods
+*!99 - Custom. See https://aladhan.com/calculation-methods
  */
 
 /**
@@ -102,10 +102,10 @@ export interface AllPrayTime {
 }
 export interface NextPray {
   pray: {
-    en:string 
-    ar:string
-  }
-  time: string
+    en: string;
+    ar: string;
+  };
+  time: string;
 }
 
 //#endregion
@@ -113,10 +113,7 @@ export interface NextPray {
 //#region Hijri
 
 export interface GregorianToHijriCalendar {
-  code: number;
-  status: string;
-  data: [
-    {
+
       hijri: {
         date: string;
         format: string;
@@ -158,15 +155,12 @@ export interface GregorianToHijriCalendar {
         };
         lunarSighting: boolean;
       };
-    }
-  ];
+    
+  
 }
 
 export interface HijriToGregorianCalendar {
-  code: number;
-  status: string;
-  data: [
-    {
+    
       hijri: {
         date: string;
         format: string;
@@ -208,14 +202,10 @@ export interface HijriToGregorianCalendar {
         };
         lunarSighting: boolean;
       };
-    }
-  ];
+    
 }
 
 export interface ConvertGregorianDateToHijriDate {
-  code: number;
-  status: string;
-  data: {
     hijri: {
       date: string;
       format: string;
@@ -257,12 +247,9 @@ export interface ConvertGregorianDateToHijriDate {
       };
       lunarSighting: boolean;
     };
-  };
+
 }
-export interface ConvertnHijriDateToGregoriaDate {
-  code: number;
-  status: string;
-  data: {
+export interface ConvertHijriDateToGregoriaDate {
     hijri: {
       date: string;
       format: string;
@@ -304,13 +291,10 @@ export interface ConvertnHijriDateToGregoriaDate {
       };
       lunarSighting: boolean;
     };
-  };
+  
 }
 
 export interface NextHijriHoliday {
-  code: number;
-  status: string;
-  data: {
     hijri: {
       date: string;
       format: string;
@@ -352,7 +336,6 @@ export interface NextHijriHoliday {
       };
       lunarSighting: boolean;
     };
-  };
 }
 
 interface CurrentIslamicYear {
@@ -362,87 +345,91 @@ interface CurrentIslamicYear {
 }
 
 export interface SpecialDays {
-  code: number;
-  status: string;
-  data: [
-    {
       month: number;
       day: number;
       name: string;
-    }
-  ];
+}
+export interface IslamicMonth {   
+      number: number;
+      en: string;
+      ar: string;
 }
 export interface IslamicMonths {
-  code: number;
-  status: string;
-  data: {
+  /** Muḥarram */
     1: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Ṣafar */
     2: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Rabīʿ al-awwal */
     3: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Rabīʿ al-thānī */
     4: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Jumādá al-ūlá */
     5: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Jumādá al-ākhirah */
     6: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Rajab */
     7: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Shaʿbān */
     8: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Ramaḍān */
     9: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Shawwāl */
     10: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Dhū al-Qaʿdah */
     11: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
+    /** Dhū al-Ḥijjah */
     12: {
       number: number;
-      en: number;
+      en: string;
       ar: string;
     };
-  };
+  
 }
 export interface HijriHolidaysByYear {
-  code: number;
-  status: string;
-  data: [
-    {
       hijri: {
         date: string;
         format: string;
@@ -484,28 +471,19 @@ export interface HijriHolidaysByYear {
         };
         lunarSighting: boolean;
       };
-    }
-  ];
+
 }
 //#endregion
 
 //#region AsmaAllahHusna
 
 export interface AsmaAllahHusna {
-  code: number;
-  status: string;
-  data: [
-    {
       name: string;
       transliteration: string;
       number: number;
       en: {
         meaning: string;
       };
-    }
-  ];
 }
 
 //#endregion
-
-

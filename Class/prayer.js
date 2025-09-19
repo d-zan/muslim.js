@@ -29,8 +29,7 @@ class Prayer {
   constructor(city, country, method) {
     if (!city) throw new PrayerError("City option is require");
     if (!country) throw new PrayerError("Country option is require");
-    if (country.length !== 2)
-      throw new PrayerError("Country option length must be 2");
+    if (country.length !== 2) throw new PrayerError("Country option length must be 2");
     if (!method) throw new PrayerError("Method option is require");
     let name = ''
     let method2;
@@ -158,7 +157,7 @@ if (hours < hoursN || (hours === hoursN && minutes > minuteN)) {
     }
     */
     const now = new Date();
-    const h = `${now.getUTCDate()}-${now.getMonth() + 1}-${now.getUTCFullYear()}`;
+    const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
 
     const api = `https://api.aladhan.com/v1/nextPrayerByAddress/${h}?address=${this.city}%2C+${this.country}&method=${this.method}`;
 

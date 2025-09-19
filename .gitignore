@@ -1,3 +1,7 @@
+# dzan
+.vscode/*
+.gitignore
+test.js
 # Logs
 logs
 *.log
