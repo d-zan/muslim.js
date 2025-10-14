@@ -1,7 +1,14 @@
-const axios = require("axios");
+const getAPI = require("../Function/getApi");
+const AllahNames = require("../JS/ByName");
+
 class AladhanAPIError extends Error {
   get name() {
     return "AladhanAPIError";
+  }
+}
+class AsmaAllahHusnaError extends Error {
+  get name() {
+    return "AsmaAllahHusnaError";
   }
 }
 /**
@@ -12,29 +19,26 @@ class AsmaAllahHusna {
    * Get all the Asma Allah Husna - Returns the Arabic text with transliteration and meaning of each name
    * @returns {Promise<import("../types/index").AsmaAllahHusna[]>}
    */
-  async all() {
-    const api = "https://api.aladhan.com/v1/asmaAlHusna"
-    const data = await fetch(api);
-    if (!data.ok) throw new AladhanAPIError(`[${data.status}]: ${data.statusText}`);
-    const json = await data.json();
-    return await json.data;
+   all() {
+    return AllahNames;
   }
   /**
    * Returns the Arabic text with transliteration and meaning
-   * @param {number} number
+   * @param {number} number 1-99
    * @returns {Promise<import("../types/index").AsmaAllahHusna>}
    */
-  async byNumber(number) {
-    const api = `https://api.aladhan.com/v1/asmaAlHusna`//`https://api.aladhan.com/v1/asmaAlHusna/${number}`
-
-        const data = await fetch(api);
-        const json = await data.json();
-        if (data.status === 404) {
-          throw new AladhanAPIError("[NOT_FOUND]: Please specify a valid number or list of comma separated numbers between 1 and 99")
-        }
-        if (!data.ok) throw new AladhanAPIError(`[${data.status}]: ${data.statusText}`);
-    return await json.data[number - 1];
-
+   byNumber(number) {
+   const names = AllahNames.find(name => name.number === number);
+if (!names) throw new AsmaAllahHusnaError("[NOT_FOUND]: Invalid number, it must be between 1 and 99.");
+  }
+  /**
+    * Returns the Arabic text with transliteration and meaning
+   @param {import("../types/index").AllahNames_Ar} arabic_name 
+  */
+  byArabicName(arabic_name) {
+const name = AllahNames.find(name => name.name === arabic_name);
+if (!name) throw new Error("Name not found");
+return name;
   }
 }
 module.exports = AsmaAllahHusna
