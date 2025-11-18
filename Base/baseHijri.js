@@ -86,8 +86,8 @@ class BaseHijri {
 
       /**
        * Get a Gregorian calendar from Hijri month and year
-       * @param {number} [month_in_hijri] - ex: 1,2,3
-       * @param {number} [year_in_hijri] -  ex: 1444,1446
+       * @param {number} month_in_hijri - ex: 1,2,3
+       * @param {number} year_in_hijri -  ex: 1444,1446
        * @returns {Promise<import("../types/index").GregorianToHijriCalendar[]>}
        */
       async hijriToGregorian(month_in_hijri, year_in_hijri) {
