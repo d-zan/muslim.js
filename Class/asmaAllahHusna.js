@@ -1,5 +1,5 @@
 const getAPI = require("../Function/getApi");
-const AllahNames = require("../JS/AsmaAllah");
+const AllahNames = require("../Data/AsmaAllah.json");
 
 class AladhanAPIError extends Error {
   get name() {
