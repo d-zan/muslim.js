@@ -1,5 +1,5 @@
 const getAPI = require("../Function/getApi");
-
+const hijriMonth = require("../Data/HijriMonths.json");
 class HijriError extends Error {
   get name() {
     return "HijriError";
@@ -23,7 +23,7 @@ function calendarQuick(m, y) {
     }
   }
   if (!y) {
-    throw new HijriError("[NOT_FOUND]: Year is reqiure.");
+    throw new HijriError("[NOT_FOUND]: Year is require.");
   }
 }
 function convertQuick(d, m, y, hijri) {
@@ -145,27 +145,26 @@ class BaseHijri {
    * Get all or one Islamic months as per Hijri calendar
    */
   get islamicMonths() {
-    const api = "https://api.aladhan.com/v1/islamicMonths";
+    //const api = "https://api.aladhan.com/v1/islamicMonths";
 
     return {
       /**
        * Get all islamic months
-       * @returns {Promise<import("../types/hijri").IslamicMonths>}
+       * @returns {import("../types/hijri").IslamicMonths}
        */
-      async all() {
-        const res = await getAPI(api);
-        return await res.data;
+      all() {
+        return hijriMonth;
       },
       /**
        * Get a specific month by its number.
-       * @param {number} number_of_month - 1>12
-       * @returns {Promise<import("../types/hijri").IslamicMonth>}
+       * @param {1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12} number_of_month - 1>12
+       * @returns {import("../types/hijri").IslamicMonth}
        */
-      async get(number_of_month) {
-        if (number_of_month > 12)
+       get(number_of_month) {
+        if (number_of_month > 12) {
           throw new HijriError("[INVALID_NUMBER]: Max value of month is 12.");
-        const res = await getAPI(api);
-        return await res.data[number_of_month];
+        }
+        return hijriMonth[number_of_month];
       },
     };
   }

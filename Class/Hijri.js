@@ -49,7 +49,7 @@ class Hijri extends BaseHijri {
    */
   async getHijriYearFromGregorianYear(year) {
     if (!year) {
-      throw new HijriError("[NOT_FOUND]: Year is reqiure");
+      throw new HijriError("[NOT_FOUND]: Year is require");
     }
     const api = `https://api.aladhan.com/v1/islamicYearFromGregorianForRamadan/${year}`;
     const res = await getAPI(api);
@@ -100,7 +100,7 @@ class Hijri extends BaseHijri {
    */
   async getHijriHolidaysByYear(year) {
     if (!year) {
-      throw new HijriError("[NOT_FOUND]: Year is reqiure");
+      throw new HijriError("[NOT_FOUND]: Year is require");
     }
     const api = `https://api.aladhan.com/v1/islamicHolidaysByHijriYear/${year}`;
     const res = await getAPI(api);
