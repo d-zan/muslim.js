@@ -1,0 +1,2 @@
+# Islamic.js 
+is a JavaScript library that provides various Islamic-related functionalities, such as prayer times, Quranic verses, and more. It is designed to be easy to use and integrate into web applications.
