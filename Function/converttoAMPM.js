@@ -20,4 +20,9 @@ function converttoAMPM(data) {
         lastthird:Time(data.Lastthird)
       };
     }
-    module.exports = converttoAMPM;
+function convertOneToAMPM(data) {
+    if (!data) return;
+   
+      return Time(data);
+    }
+module.exports = {converttoAMPM,convertOneToAMPM};

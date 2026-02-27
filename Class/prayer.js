@@ -1,5 +1,8 @@
 const getMethodNumber = require("../Function/getMethodNumber");
-const converttoAMPM = require("../Function/converttoAMPM");
+const {
+  converttoAMPM,
+  convertOneToAMPM,
+} = require("../Function/converttoAMPM");
 const StatusCode = require("../JS/StatusCode");
 const MethodNumber = require("../JS/MethodNumber");
 const MethodName = require("../JS/MethodName");
@@ -24,7 +27,7 @@ class Prayer extends BasePrayer {
   /**
    * @param {string} city - ex: Cairo, London
    * @param {string} country - ex: EG, UK - A country name or 2 character alpha ISO 3166 code
-   * @param {import("../types/index").Method} method - A prayer times calculation method
+   * @param {import("../types/prayer").Method} method - A prayer times calculation method
    */
   constructor(city, country, method) {
     if (!city) throw new PrayerError("City option is require");
@@ -39,7 +42,7 @@ class Prayer extends BasePrayer {
   /**
   Get all pray time
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
-   * @returns {Promise<import("../types/index").AllPrayTime>}
+   * @returns {Promise<import("../types/prayer").AllPrayTime>}
    */
   async getAllPrayTime(ToAM_PM) {
     const api = `https://api.aladhan.com/v1/timingsByCity?city=${this.city}&country=${this.country}&method=${this.method}`;
@@ -50,75 +53,113 @@ class Prayer extends BasePrayer {
       if (res.ok) {
         return converttoAMPM(time);
       } else {
-        throw new AladhanAPIError(
-          `[${json.code}]: ${StatusCode[`${json.code}`]}` + json.message
-        );
+        throw new AladhanAPIError(`[${json.code}]:` + json.message);
       }
     } else {
       if (res.ok) {
         return time;
       } else {
-        throw new AladhanAPIError(
-          `[${json.code}]: ${StatusCode[`${json.code}`]}` + json.message
-        );
+        throw new AladhanAPIError(`[${json.code}]: ` + json.message);
       }
     }
   }
   /**
    * Returns next prayer time for a specific date
-   * @returns {Promise<import('../types/index.ts').NextPray>}
+   * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
+   * @returns {Promise<import('../types/prayer').NextPray>}
    */
-  async getNextPrayTime() {
+  async getNextPrayTime(ToAM_PM) {
     const now = new Date();
     const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
 
-    const api = `https://api.aladhan.com/v1/nextPrayerByAddress/${h}?address=${this.city}%2C+${this.country}&method=${this.method}`;
+    const api = `https://api.aladhan.com/v1/nextPrayerByAddress/${h}?address=${this.city}, ${this.country}`;
 
     const ax = await fetch(api);
     const pray2 = await ax.json();
     const pray = pray2.data.timings;
     let opj = {};
-
-    if (pray.Fajr) {
-      opj["time"] = pray.Fajr;
-      opj["pray"] = { en: "Fajr", ar: "الفجر" };
-    }
-    if (pray.Sunrise) {
-      opj["time"] = pray.Sunrise;
-      opj["pray"] = { en: "Sunrise", ar: "الشروق" };
-    }
-    if (pray.Dhuhr) {
-      opj["time"] = pray.Dhuhr;
-      opj["pray"] = { en: "Dhuhr", ar: "الظهر" };
-    }
-    if (pray.Asr) {
-      opj["time"] = pray.Asr;
-      opj["pray"] = { en: "Asr", ar: "العصر" };
-    }
-    if (pray.Maghrib) {
-      opj["time"] = pray.Maghrib;
-      opj["pray"] = { en: "Maghrib", ar: "المغرب" };
-    }
-    if (pray.Isha) {
-      opj["time"] = pray.Isha;
-      opj["pray"] = { en: "Isha", ar: "العشاء" };
-    }
-    if (pray.Imsak) {
-      opj["time"] = pray.Imsak;
-      opj["pray"] = { en: "Imsak", ar: "الإمساك" };
-    }
-    if (pray.Midnight) {
-      opj["time"] = pray.Midnight;
-      opj["pray"] = { en: "Midnight", ar: "منتصف الليل" };
-    }
-    //
-    if (pray.Firstthird) {
-      opj["time"] = pray.Firstthird;
-      opj["pray"] = { en: "Firstthird", ar: "التهجد" };
-    }
-    if (pray.Lastthird) {
-      opj["time"] = pray.Lastthird;
-      opj["pray"] = { en: "Lastthird", ar: "التهجد" };
+    if (ToAM_PM) {
+      if (pray.Fajr) {
+        opj["time"] = convertOneToAMPM(pray.Fajr);
+        opj["pray"] = { en: "Fajr", ar: "الفجر" };
+      }
+      if (pray.Sunrise) {
+        opj["time"] = convertOneToAMPM(pray.Sunrise);
+        opj["pray"] = { en: "Sunrise", ar: "الشروق" };
+      }
+      if (pray.Dhuhr) {
+        opj["time"] = convertOneToAMPM(pray.Dhuhr);
+        opj["pray"] = { en: "Dhuhr", ar: "الظهر" };
+      }
+      if (pray.Asr) {
+        opj["time"] = convertOneToAMPM(pray.Asr);
+        opj["pray"] = { en: "Asr", ar: "العصر" };
+      }
+      if (pray.Maghrib) {
+        opj["time"] = convertOneToAMPM(pray.Maghrib);
+        opj["pray"] = { en: "Maghrib", ar: "المغرب" };
+      }
+      if (pray.Isha) {
+        opj["time"] = convertOneToAMPM(pray.Isha);
+        opj["pray"] = { en: "Isha", ar: "العشاء" };
+      }
+      if (pray.Imsak) {
+        opj["time"] = convertOneToAMPM(pray.Imsak);
+        opj["pray"] = { en: "Imsak", ar: "الإمساك" };
+      }
+      if (pray.Midnight) {
+        opj["time"] = convertOneToAMPM(pray.Midnight);
+        opj["pray"] = { en: "Midnight", ar: "منتصف الليل" };
+      }
+      if (pray.Firstthird) {
+        opj["time"] = convertOneToAMPM(pray.Firstthird);
+        opj["pray"] = { en: "Firstthird", ar: "التهجد" };
+      }
+      if (pray.Lastthird) {
+        opj["time"] = convertOneToAMPM(pray.Lastthird);
+        opj["pray"] = { en: "Lastthird", ar: "التهجد" };
+      }
+    } else {
+      if (pray.Fajr) {
+        opj["time"] = pray.Fajr;
+        opj["pray"] = { en: "Fajr", ar: "الفجر" };
+      }
+      if (pray.Sunrise) {
+        opj["time"] = pray.Sunrise;
+        opj["pray"] = { en: "Sunrise", ar: "الشروق" };
+      }
+      if (pray.Dhuhr) {
+        opj["time"] = pray.Dhuhr;
+        opj["pray"] = { en: "Dhuhr", ar: "الظهر" };
+      }
+      if (pray.Asr) {
+        opj["time"] = pray.Asr;
+        opj["pray"] = { en: "Asr", ar: "العصر" };
+      }
+      if (pray.Maghrib) {
+        opj["time"] = pray.Maghrib;
+        opj["pray"] = { en: "Maghrib", ar: "المغرب" };
+      }
+      if (pray.Isha) {
+        opj["time"] = pray.Isha;
+        opj["pray"] = { en: "Isha", ar: "العشاء" };
+      }
+      if (pray.Imsak) {
+        opj["time"] = pray.Imsak;
+        opj["pray"] = { en: "Imsak", ar: "الإمساك" };
+      }
+      if (pray.Midnight) {
+        opj["time"] = pray.Midnight;
+        opj["pray"] = { en: "Midnight", ar: "منتصف الليل" };
+      }
+      if (pray.Firstthird) {
+        opj["time"] = pray.Firstthird;
+        opj["pray"] = { en: "Firstthird", ar: "التهجد" };
+      }
+      if (pray.Lastthird) {
+        opj["time"] = pray.Lastthird;
+        opj["pray"] = { en: "Lastthird", ar: "التهجد" };
+      }
     }
     return opj;
   }

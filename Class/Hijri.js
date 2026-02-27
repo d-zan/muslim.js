@@ -17,7 +17,7 @@ class Hijri extends BaseHijri {
 
   /**
    * Get the next upcoming holiday in the Hijri calendar
-   * @returns {Promise<import("../types/index").NextHijriHoliday>}
+   * @returns {Promise<import("../types/hijri.js").NextHijriHoliday>}
    */
   async getNextHijriHoliday() {
     const api = "https://api.aladhan.com/v1/nextHijriHoliday";
@@ -86,7 +86,7 @@ class Hijri extends BaseHijri {
   }
   /**
    * Returns a list of special days as per Hijri calendar
-   * @returns {Promise<import("../types/index").SpecialDays[]>}
+   * @returns {Promise<import("../types/hijri.js").SpecialDays[]>}
    */
   async getSpecialDays() {
     const api = "https://api.aladhan.com/v1/specialDays";
@@ -96,7 +96,7 @@ class Hijri extends BaseHijri {
   /**
    * Returns a list of holidays as per the Hijri year
    * @param {number} year ex: 1444,1446,1445
-   * @returns {Promise<import("../types/index").HijriHolidaysByYear[]>}
+   * @returns {Promise<import("../types/hijri.js").HijriHolidaysByYear[]>}
    */
   async getHijriHolidaysByYear(year) {
     if (!year) {
