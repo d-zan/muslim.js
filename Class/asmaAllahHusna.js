@@ -1,11 +1,5 @@
-const getAPI = require("../Function/getApi");
 const AllahNames = require("../Data/AsmaAllah.json");
 
-class AladhanAPIError extends Error {
-  get name() {
-    return "AladhanAPIError";
-  }
-}
 class AsmaAllahHusnaError extends Error {
   get name() {
     return "AsmaAllahHusnaError";
@@ -25,7 +19,7 @@ class AsmaAllahHusna {
   /**
    * Returns the Arabic text with transliteration and meaning
    * @param {number} number 1-99
-   * @returns {import("../types/index").AsmaAllahHusna}
+   * @returns {import("../types/asmaAllahHusna").AsmaAllahHusna}
    */
   byNumber(number) {
     const names = AllahNames.find((name) => name.number === number);
@@ -37,7 +31,7 @@ class AsmaAllahHusna {
   }
   /**
     * Returns the Arabic text with transliteration and meaning
-   @param {import("../types/index").AllahNames_Ar} arabic_name 
+   @param {import("../types/asmaAllahHusna").AllahNames['ar']} arabic_name 
   */
   byArabicName(arabic_name) {
     const name = AllahNames.find((name) => name.name === arabic_name);

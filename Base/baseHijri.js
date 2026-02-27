@@ -74,7 +74,7 @@ class BaseHijri {
        * Get a Hijri calendar from a Gregorian month and year
        * @param {number} [month_in_gregorian] - ex: 1,2,3
        * @param {number} [year_in_gregorian] -  ex: 2025,1947,1972
-       * @returns {Promise<import("../types/index").GregorianToHijriCalendar[]>}
+       * @returns {Promise<import("../types/hijri").GregorianToHijriCalendar[]>}
        */
       async gregorianToHijri(month_in_gregorian, year_in_gregorian) {
         calendarQuick(month_in_gregorian, year_in_gregorian);
@@ -88,7 +88,7 @@ class BaseHijri {
        * Get a Gregorian calendar from Hijri month and year
        * @param {number} month_in_hijri - ex: 1,2,3
        * @param {number} year_in_hijri -  ex: 1444,1446
-       * @returns {Promise<import("../types/index").GregorianToHijriCalendar[]>}
+       * @returns {Promise<import("../types/hijri").GregorianToHijriCalendar[]>}
        */
       async hijriToGregorian(month_in_hijri, year_in_hijri) {
         calendarQuick(month_in_hijri, year_in_hijri);
@@ -109,7 +109,7 @@ class BaseHijri {
        * @param {number} day_in_gregorian - 1>31
        * @param {number} month_in_gregorian - 1>12
        * @param {number} year_in_gregorian - Ex: 2020, 1972
-       * @returns {Promise<import("../types/index").ConvertGregorianDateToHijriDate>}
+       * @returns {Promise<import("../types/hijri").ConvertGregorianDateToHijriDate>}
        */
       async GregorianToHijri(
         day_in_gregorian,
@@ -131,7 +131,7 @@ class BaseHijri {
        * @param {number} day_in_hijri - 1>30
        * @param {number} month_in_hijri - 1>12
        * @param {number} year_in_hijri - Ex: 1444, 1429
-       * @returns {Promise<import("../types/index").ConvertHijriDateToGregoriaDate>}
+       * @returns {Promise<import("../types/hijri").ConvertHijriDateToGregoriaDate>}
        */
       async HijriToGregorian(day_in_hijri, month_in_hijri, year_in_hijri) {
         convertQuick(day_in_hijri, month_in_hijri, year_in_hijri, true);
@@ -150,7 +150,7 @@ class BaseHijri {
     return {
       /**
        * Get all islamic months
-       * @returns {Promise<import("../types/index").IslamicMonths>}
+       * @returns {Promise<import("../types/hijri").IslamicMonths>}
        */
       async all() {
         const res = await getAPI(api);
@@ -159,7 +159,7 @@ class BaseHijri {
       /**
        * Get a specific month by its number.
        * @param {number} number_of_month - 1>12
-       * @returns {Promise<import("../types/index").IslamicMonth>}
+       * @returns {Promise<import("../types/hijri").IslamicMonth>}
        */
       async get(number_of_month) {
         if (number_of_month > 12)
