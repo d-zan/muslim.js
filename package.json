@@ -1,7 +1,7 @@
 {
   "name": "islamic.js",
   "version": "1.0.0",
-  "description": "Node.js package help you with Aladhan API v1.",
+  "description": "Node.js package help you with Aladhan APIv1, A comprehensive wrapper for Aladhan API v1, providing easy access to prayer times, Hijri calendars, and Islamic data for Node.js applications.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"

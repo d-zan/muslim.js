@@ -1,6 +1,6 @@
 /**
 * Get anything in Quran with format (Text)
-* - supported language: Arabic, English 
+* - Supported language: Arabic, English 
 */
 class LocalQuranText {
 
