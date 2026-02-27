@@ -64,6 +64,107 @@ class Prayer extends BasePrayer {
     }
   }
   /**
+  @private
+   * Returns next prayer time for a specific date by address
+   * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
+   * @returns {Promise<import('../types/prayer').NextPray>}
+   */
+  async getNextPrayTimeByAddress(ToAM_PM) {
+    const now = new Date();
+    const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
+
+    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${await this.latitude()}&longitude=${await this.longitude()}`;
+
+    const ax = await fetch(api);
+    const pray2 = await ax.json();
+    const pray = pray2.data.timings;
+    let opj = {};
+    if (ToAM_PM) {
+      if (pray.Fajr) {
+        opj["time"] = convertOneToAMPM(pray.Fajr);
+        opj["pray"] = { en: "Fajr", ar: "الفجر" };
+      }
+      if (pray.Sunrise) {
+        opj["time"] = convertOneToAMPM(pray.Sunrise);
+        opj["pray"] = { en: "Sunrise", ar: "الشروق" };
+      }
+      if (pray.Dhuhr) {
+        opj["time"] = convertOneToAMPM(pray.Dhuhr);
+        opj["pray"] = { en: "Dhuhr", ar: "الظهر" };
+      }
+      if (pray.Asr) {
+        opj["time"] = convertOneToAMPM(pray.Asr);
+        opj["pray"] = { en: "Asr", ar: "العصر" };
+      }
+      if (pray.Maghrib) {
+        opj["time"] = convertOneToAMPM(pray.Maghrib);
+        opj["pray"] = { en: "Maghrib", ar: "المغرب" };
+      }
+      if (pray.Isha) {
+        opj["time"] = convertOneToAMPM(pray.Isha);
+        opj["pray"] = { en: "Isha", ar: "العشاء" };
+      }
+      if (pray.Imsak) {
+        opj["time"] = convertOneToAMPM(pray.Imsak);
+        opj["pray"] = { en: "Imsak", ar: "الإمساك" };
+      }
+      if (pray.Midnight) {
+        opj["time"] = convertOneToAMPM(pray.Midnight);
+        opj["pray"] = { en: "Midnight", ar: "منتصف الليل" };
+      }
+      if (pray.Firstthird) {
+        opj["time"] = convertOneToAMPM(pray.Firstthird);
+        opj["pray"] = { en: "Firstthird", ar: "التهجد" };
+      }
+      if (pray.Lastthird) {
+        opj["time"] = convertOneToAMPM(pray.Lastthird);
+        opj["pray"] = { en: "Lastthird", ar: "التهجد" };
+      }
+    } else {
+      if (pray.Fajr) {
+        opj["time"] = pray.Fajr;
+        opj["pray"] = { en: "Fajr", ar: "الفجر" };
+      }
+      if (pray.Sunrise) {
+        opj["time"] = pray.Sunrise;
+        opj["pray"] = { en: "Sunrise", ar: "الشروق" };
+      }
+      if (pray.Dhuhr) {
+        opj["time"] = pray.Dhuhr;
+        opj["pray"] = { en: "Dhuhr", ar: "الظهر" };
+      }
+      if (pray.Asr) {
+        opj["time"] = pray.Asr;
+        opj["pray"] = { en: "Asr", ar: "العصر" };
+      }
+      if (pray.Maghrib) {
+        opj["time"] = pray.Maghrib;
+        opj["pray"] = { en: "Maghrib", ar: "المغرب" };
+      }
+      if (pray.Isha) {
+        opj["time"] = pray.Isha;
+        opj["pray"] = { en: "Isha", ar: "العشاء" };
+      }
+      if (pray.Imsak) {
+        opj["time"] = pray.Imsak;
+        opj["pray"] = { en: "Imsak", ar: "الإمساك" };
+      }
+      if (pray.Midnight) {
+        opj["time"] = pray.Midnight;
+        opj["pray"] = { en: "Midnight", ar: "منتصف الليل" };
+      }
+      if (pray.Firstthird) {
+        opj["time"] = pray.Firstthird;
+        opj["pray"] = { en: "Firstthird", ar: "التهجد" };
+      }
+      if (pray.Lastthird) {
+        opj["time"] = pray.Lastthird;
+        opj["pray"] = { en: "Lastthird", ar: "التهجد" };
+      }
+    }
+    return opj;
+  }
+    /**
    * Returns next prayer time for a specific date
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
    * @returns {Promise<import('../types/prayer').NextPray>}
@@ -72,7 +173,7 @@ class Prayer extends BasePrayer {
     const now = new Date();
     const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
 
-    const api = `https://api.aladhan.com/v1/nextPrayerByAddress/${h}?address=${this.city}, ${this.country}`;
+    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${await this.latitude()}&longitude=${await this.longitude()}`;
 
     const ax = await fetch(api);
     const pray2 = await ax.json();
