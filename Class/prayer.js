@@ -73,7 +73,7 @@ class Prayer extends BasePrayer {
     const now = new Date();
     const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
 
-    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${await this.latitude()}&longitude=${await this.longitude()}`;
+    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${this.latitude}&longitude=${this.longitude}`;
 
     const ax = await fetch(api);
     const pray2 = await ax.json();
@@ -164,7 +164,7 @@ class Prayer extends BasePrayer {
     }
     return opj;
   }
-    /**
+  /**
    * Returns next prayer time for a specific date
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
    * @returns {Promise<import('../types/prayer').NextPray>}
@@ -173,7 +173,7 @@ class Prayer extends BasePrayer {
     const now = new Date();
     const h = `${now.getDay()}-${now.getMonth() + 1}-${now.getFullYear()}`;
 
-    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${await this.latitude()}&longitude=${await this.longitude()}`;
+    const api = `https://api.aladhan.com/v1/nextPrayer/${h}?latitude=${this.latitude}&longitude=${this.longitude}`;
 
     const ax = await fetch(api);
     const pray2 = await ax.json();
