@@ -1,6 +1,6 @@
 const getMethodName = require("../Function/getMethodName");
 const getMethodNumber = require("../Function/getMethodNumber");
-
+const prayerM = require("../Data/Prayer.json")
 class BasePrayer {
       /**
    * @param {string} city - ex: Cairo, London
@@ -12,17 +12,11 @@ class BasePrayer {
     this.city = city;
     this.country = country;
   }
-  async latitude() {
+  latitude() {
     let latitude = 0;
-    const res = await fetch("https://api.aladhan.com/v1/methods");
     const number = getMethodNumber(this.methods);
     const name = getMethodName(number);
-    const json = await res.json();
-    const data = await json;
-
-    latitude = data.data[name].location.latitude;
-    //longitude =  json.location.longitude;
-
+    latitude = prayerM[name].location.latitude;
     return latitude;
   }
   async longitude() {

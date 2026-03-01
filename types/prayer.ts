@@ -1,3 +1,4 @@
+
 export type Method =
   | "Jafari / Shia Ithna-Ashari"
   | "University of Islamic Sciences, Karachi"
@@ -57,6 +58,8 @@ export interface MethodNumber {
   /**See https://aladhan.com/calculation-methods*/
   Custom: 99;
 }
+export type MethodNumberType = MethodNumber[Method];
+export type MethodName = typeof import("../JS/MethodName")[MethodNumberType];
 /**
  *!0 - Jafari / Shia Ithna-Ashari
  *!1 - University of Islamic Sciences, Karachi
