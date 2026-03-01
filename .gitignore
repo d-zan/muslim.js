@@ -2,6 +2,7 @@
 .gitignore
 test/*
 .vscode/*
+dev.md
 # Logs
 logs
 *.log
