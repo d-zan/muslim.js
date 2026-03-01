@@ -1,0 +1,5 @@
+class QuraTextnHelp {
+    constructor() {
+        
+    }
+}
