@@ -1,191 +1,43 @@
-export type QuranNameText =
-  | "تفسير المیسر"
-  | "Məmmədəliyev & Bünyadov"
-  | "Musayev"
-  | "মুহিউদ্দীন খান"
-  | "Hrbek"
-  | "Nykl"
-  | "Abu Rida"
-  | "Bubenheim & Elyas"
-  | "Khoury"
-  | "Zaidan"
-  | "ދިވެހި"
-  | "Ahmed Ali"
-  | "Ahmed Raza Khan"
-  | "Arberry"
-  | "Asad"
-  | "Daryabadi"
-  | "Hilali & Khan"
-  | "Pickthall"
-  | "Qaribullah & Darwish"
-  | "Saheeh International"
-  | "Sarwar"
-  | "Yusuf Ali"
-  | "آیتی"
-  | "فولادوند"
-  | "الهی قمشه‌ای"
-  | "مکارم شیرازی"
-  | "Hamidullah"
-  | "Gumi"
-  | "फ़ारूक़ ख़ान & नदवी"
-  | "Bahasa Indonesia"
-  | "Piccardo"
-  | "Japanese"
-  | "Korean"
-  | "ته‌فسیری ئاسان"
-  | "അബ്ദുല്‍ ഹമീദ് & പറപ്പൂര്‍"
-  | "Keyzer"
-  | "Einar Berg"
-  | "Bielawskiego"
-  | "El-Hayek"
-  | "Grigore"
-  | "Кулиев"
-  | "Османов"
-  | "Порохова"
-  | "امروٽي"
-  | "Abduh"
-  | "Sherif Ahmeti"
-  | "Feti Mehdiu"
-  | "Efendi Nahi"
-  | "Bernström"
-  | "Al-Barwani"
-  | "ஜான் டிரஸ்ட்"
-  | "Оятӣ"
-  | "ภาษาไทย"
-  | "Süleyman Ateş"
-  | "Alİ Bulaç"
-  | "Diyanet İşleri"
-  | "Abdulbakî Gölpınarlı"
-  | "Öztürk"
-  | "Çeviriyazı"
-  | "Diyanet Vakfı"
-  | "Elmalılı Hamdi Yazır"
-  | "Suat Yıldırım"
-  | "Edip Yüksel"
-  | "Yakub Ibn Nugman"
-  | "محمد صالح"
-  | "احمد علی"
-  | "جالندہری"
-  | "علامہ جوادی"
-  | "احمد رضا خان"
-  | "طاہر القادری"
-  | "Мухаммад Содик"
-  | "Maududi"
-  | "Shakir"
-  | "Transliteration"
-  | "Cortes"
-  | "انصاریان"
-  | "القرآن الكريم المبسط (تشكيل بسيط) (simple)"
-  | "القرآن الكريم المبسط (بدون تشكيل) (simple-clean)"
-  | "القرآن الكريم المبسط (بدون تشكيل) (simple-enhanced)"
-  | "القرآن الكريم المبسط (بدون تشكيل) (simple-min)"
-  | "القرآن الكريم برسم العثماني (تشكيل بسيط) (uthmani-min)"
-  | "القرآن الكريم برسم العثماني (uthmani)"
-  | "Теофанов"
-  | "Mlivo"
-  | "بهرام پور"
-  | "Asad"
-  | "خرمشاهی"
-  | "مجتبوی"
-  | "फ़ारूक़ ख़ान & अहमद"
-  | "Quraish Shihab"
-  | "Basmeih"
-  | "Абу Адель"
-  | "Крачковский"
-  | "Аль-Мунтахаб"
-  | "Саблуков"
-  | "محمد جوناگڑھی"
-  | "ابوالاعلی مودودی"
-  | "Ma Jian"
-  | "Ma Jian (Traditional)"
-  | "خرمدل"
-  | "معزی"
-  | "Korkut"
-  | "تفسير الجلالين"
-  | "القرآن الكريم المجود (ملون) (tajweed)"
-  | "معاني مفردات القرآن (wordbyword)"
-  | "القرآن الكريم للأطفال"
-  | "Corpus"
-  | "Naseem Ismail"
-  | "Buck"
-  | "Ma Zhong Gang"
-  | "معاني مفردات القرآن ولفظها (wordbyword-2)"
-  | "القرآن الكريم برسم العثماني (unicode)"
-  | "القرآن الكريم برسم العثماني (quran-academy)"
-  | "Kur'an - sa prevodom (značenja) na bosanski jezik, utemeljen na Ibn Kesirovom tumačenju, i kratki komentar"
-  | "Clear Qur'an - Talal Itani"
-  | "تفسير القرطبي"
-  | "تنوير المقباس من تفسير بن عباس"
-  | "الـتـفـسـيـر الـوسـيـط"
-  | "تفسير البغوي"
-  | "Ghazi Muhammed Hashim"
-  | "Mubarakpuri"
-  | "ሳዲቅ & ሳኒ ሐቢብ"
-  | "At Mensur"
-  | "জহুরুল হক"
-  | "Qarai"
-  | "Wahiduddin Khan"
-  | "Bornez"
-  | "Garcia"
-  | "محمد حسین نجفی"
-  | "قرائتی"
-  | "صادقی تهرانی"
-  | "صفوی"
-  | "Tafsir Jalalayn"
-  | "കാരകുന്ന് & എളയാവൂര്"
-  | "Leemhuis"
-  | "Siregar"
-  | "عبدالولي"
-  | "Кулиев + ас-Саади"
-  | "Chechen by Magomedov"
-  | "Транскрипция";
+import { QuranFormat, QuranReadDirection, QuranType } from './index';
+import { QuranNameText, QuranEnglishName, QuranIdentifierText, QuranLanguageText  } from './types/quranText';
+import {
+  SurahNames,
+  SurahEnglishNames,
+  SurahEnglishNameTranslation,
+  SurahRevelationType,
+} from "./types/surah";
 
-export type QuranLanguageText = 
-| "ar"
-| "az"
-| "bn"
-| "cs"
-| "de"
-| "dv"
-| "en"
-| "fa"
-| "fr"
-| "ha"
-| "hi"
-| "id"
-| "it"
-| "ja"
-| "ko"
-| "ku"
-| "ml"
-| "nl"
-| "no"
-| "pl"
-| "pt"
-| "ro"
-| "ru"
-| "sd"
-| "so"
-| "sq"
-| "sv"
-| "sw"
-| "ta"
-| "tg"
-| "th"
-| "tr"
-| "tt"
-| "ug"
-| "ur"
-| "uz"
-| "es"
-| "bg"
-| "bs"
-| "ms"
-| "zh"
-| "si"
-| "ba"
-| "my"
-| "am"
-| "ber"
-| "ps"
-| "ce";  
+export interface TextEdition {
+  identifier: QuranIdentifierText;
+  name: QuranNameText;
+  englishName: QuranEnglishName;
+  language: QuranLanguageText;
+  direction: QuranReadDirection;
+  format: "text";
+  type: QuranType;
+}
+
+
+
+
+export interface AyahText {
+  number: number;
+  text: string;
+  numberInSurah: number;
+  juz: number;
+  manzil: number;
+  page: number;
+  ruku: number;
+  hizbQuarter: number;
+  sajda: boolean;
+}
+
+export interface SurahText {
+  number: number;
+  name: SurahNames;
+  englishName: SurahEnglishNames;
+  englishNameTranslation: SurahEnglishNameTranslation;
+  revelationType: SurahRevelationType;
+  ayahs: AyahText[];
+  edition: TextEdition;
+}
