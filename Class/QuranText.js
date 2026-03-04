@@ -1,5 +1,4 @@
-const identifierByName = require("../JS/identifierByName");
-const SurahNumberByName = require("../JS/SurahNumberByName");
+const BaseQuranText = require("../Base/baseQuranText");
 class QuranTextError extends Error {
   get name() {
     return "QuranTextError";
@@ -13,79 +12,31 @@ class AlQuranCloudAPIError extends Error {
 /**
  * Get anything in Quran with text format
  */
-class QuranText {
+class QuranText extends BaseQuranText {
   /**
    * @param {import("../types/quran/types/quranText").QuranNameText} quran
+   * @param {import("../types/quran/index").QuranAdvancedOptions} [options]
    */
-  constructor(quran) {
+  constructor(quran, options) {
+    super(quran, options);
     this.quran = quran;
   }
-  /**
-  @returns {import("../types/quran/types/quranText").QuranIdentifierText}
-  */
-  get edition() {
-    const edition = identifierByName[this.quran];
-    return edition;
-  }
-  /**
-  Get a complete Quran.
-  */
   full() {}
   juz() {}
   /**
    * Get a Surah from Quran
    * @param {import("../types/quran/types/surah").SurahNames | number} surah - The Surah name or the number.
-   * @returns {Promise<import("../types/quran/index").SurahText>}
    */
   async surah(surah) {
-    if (typeof surah === "number") {
-      if (surah > 114)
-        throw new QuranTextError("The max number value of 'surah' is 114.");
-      if (surah < 1)
-        throw new QuranTextError("The min number value of 'surah' is 1.");
-      const res = await fetch(
-        `https://api.alquran.cloud/v1/surah/${surah}/${this.edition}`,
-      );
-      if (!res.ok)
-      throw AlQuranCloudAPIError(
-        `[${res.status}]: ${await res.text()}`,
-      );
-      const json = await res.json();
-      return json.data;
-    } else {
-      const surahNumber = SurahNumberByName[surah];
-      if (!surahNumber)
-        throw new QuranTextError(
-          "The string of 'surah' value doesn't match the types values. Please try again with a correct type from package.",
-        );
-      const res = await fetch(
-        `https://api.alquran.cloud/v1/surah/${surahNumber}/${this.edition}`,
-      );
-      if (!res.ok)
-      throw AlQuranCloudAPIError(
-        `[${res.status}]: ${await res.text()}`,
-      );
-      const json = await res.json();
-      return json.data;
-    }
+    return await this.getSurah(surah);
   }
 
   /**
    * Information about this Quran edition.
-  @param {import("../types/quran/types/quranText").QuranIdentifierText} [edition] - Another edition?
-  @returns {Promise<import("../types/quran/text").TextEdition>}
+   * @param {import("../types/quran/types/quranText").QuranIdentifierText} [edition] - Another edition?
    */
   async editionInfo(edition = this.edition) {
-    const resEdit = await fetch("https://api.alquran.cloud/v1/edition");
-    if (!resEdit.ok)
-      throw AlQuranCloudAPIError(
-        `[${resEdit.status}]: ${await resEdit.text()}`,
-      );
-    const editions = await resEdit.json();
-    const theEdition = editions.data.filter((e) => e.identifier === edition);
-    if (!theEdition)
-      throw AlQuranCloudAPIError("The Quran edition is undefined");
-    return theEdition[0];
+    return await this.getIdentifierInfo(edition);
   }
 }
 module.exports = QuranText;
