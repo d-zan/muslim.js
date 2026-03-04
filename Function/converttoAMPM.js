@@ -4,9 +4,10 @@ function Time(timings) {
   hours = hours % 12 || 12;
   return `${hours}:${minutes.toString().padStart(2, "0")} ${period}`;
 }
+/** @private */
 function converttoAMPM(data) {
   if (!data) return;
-
+  
   return {
     fajr: Time(data.Fajr),
     sunrise: Time(data.Sunrise),
@@ -20,6 +21,7 @@ function converttoAMPM(data) {
     lastthird: Time(data.Lastthird),
   };
 }
+/** @private */
 function convertOneToAMPM(data) {
   if (!data) return;
 

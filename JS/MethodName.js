@@ -1,3 +1,4 @@
+/** @private */
 const MethodName = {
   0: "JAFARI",
   1: "KARACHI",

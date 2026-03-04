@@ -1,3 +1,4 @@
+/** @private */
 const identifierByName = {
 "تفسير المیسر": "ar.muyassar",
 "Məmmədəliyev & Bünyadov": "az.mammadaliyev",

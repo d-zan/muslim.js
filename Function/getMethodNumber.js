@@ -5,6 +5,7 @@ class MethodError extends Error {
   }
 }
 /**
+* @private
 * @param {import("../types/prayer").Method} method
 */
 function getMethodNumber(method) {

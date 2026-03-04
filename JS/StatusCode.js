@@ -1,3 +1,4 @@
+/** @private */
 const StatusCode = {
     '100': 'Continue',
     '101': 'Switching Protocols',

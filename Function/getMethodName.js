@@ -6,7 +6,7 @@ class MethodError extends Error {
   }
 }
 /**
- * 
+ * @private
  * @param {import("../types/prayer").MethodNumberType} method 
  * @returns {import("../types/prayer").MethodName} 
  */

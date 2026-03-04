@@ -1,3 +1,4 @@
+/** @private */
 const MethodNumber = {
     "Jafari / Shia Ithna-Ashari": 0,
     "University of Islamic Sciences, Karachi": 1,
