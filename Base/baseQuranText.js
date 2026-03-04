@@ -1,7 +1,8 @@
 const { time, timeEnd } = require("console");
 const identifierByName = require("../JS/identifierByName");
 const SurahNumberByName = require("../JS/SurahNumberByName");
-const quranAPI = require("../Function/quranApi");
+const quranAPI = require("../Function/API/quranApi");
+const quranAPIData = require("../Function/API/quranAPIData");
 
 class QuranTextError extends Error {
   get name() {
@@ -37,16 +38,23 @@ class BaseQuranText {
     const edition = identifierByName[this.quran];
     return edition;
   }
-/**
-*
-*/
- async getFullQuran() {
-const res = await quranAPI(this.domain,"v1","quran",this.edition);
+  /**
+   * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
+   *
+   */
+  async getFullQuran(edition = this.edition) {
+    const res = await quranAPI(this.domain, "v1", "quran", edition);
+    const json = await quranAPIData(this.domain,"v1","quran",edition);
+    if (!res.ok) {
+        const api = json;
+        throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
+      }
+
+      return json.data;
   }
   getJuz() {}
   /**
    * @param {import("../types/quran/").SurahNames | number} surah - The Surah name or the number.
-   * @returns {Promise<import("../types/quran/").SurahText>}
    * @private
    */
   async getSurah(surah) {
@@ -61,13 +69,15 @@ const res = await quranAPI(this.domain,"v1","quran",this.edition);
           "[MIN_VALUE]: The min number value of 'surah' is 1.",
         );
       }
-      const res = await quranAPI(this.domain,"v1","surah",`${surah}/${this.edition}`);
+      const content = `${surah}/${this.edition}`;
+      const json = await quranAPIData(this.domain, "v1", "surah", content);
+      const res = await quranAPI(this.domain, "v1", "surah", content);
 
       if (!res.ok) {
-        const api = await res.json();
+        const api = json;
         throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
       }
-      const json = await res.json();
+
       return json.data;
     } else if (typeof surah === "string") {
       const surahNumber = SurahNumberByName[surah];
@@ -76,12 +86,15 @@ const res = await quranAPI(this.domain,"v1","quran",this.edition);
           "The string value of 'surah' doesn't match the types values. Please try again with a correct string from package.",
         );
       }
-      const res = await quranAPI(this.domain,"v1","surah",`${surahNumber}/${this.edition}`);
+      const content = `${surahNumber}/${this.edition}`;
+      const json = await quranAPIData(this.domain, "v1", "surah", content);
+      const res = await quranAPI(this.domain, "v1", "surah", content);
+
       if (!res.ok) {
-        const api = await res.json();
+        const api = json;
         throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
       }
-      const json = await res.json();
+
       return json.data;
     } else {
       throw new QuranTextError(
@@ -104,22 +117,22 @@ const res = await quranAPI(this.domain,"v1","quran",this.edition);
   }
   /**
    * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
-   * @returns {Promise<import("../types/quran/").TextEdition>}
    * @private
    */
   async getIdentifierInfo(edition) {
-    const resEdit = await quranAPI(this.domain,"v1","edition");
-    if (!resEdit.ok) {
-      throw AlQuranCloudAPIError(
-        `[${resEdit.status}]: ${await resEdit.text()}`,
-      );
+    const res = await quranAPI(this.domain, "v1", "edition?format=text");
+    const json = await quranAPIData(this.domain, "v1", "edition?format=text");
+    if (!res.ok) {
+      const api = json;
+      throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
     }
+
     // time("How much time by find");
-    const editions = await resEdit.json();
-    const theEdition = editions.data.find((e) => e.identifier === edition);
+    const editions = json.data;
+    const theEdition = editions.find((e) => e.identifier === edition);
     //timeEnd("How much time by find");
     if (!theEdition) {
-      throw new QuranTextError("[CANT_FOUND]:The Quran edition is undefined");
+      throw new QuranTextError("[CANT_FOUND]: The Quran edition is undefined");
     }
     return theEdition;
   }

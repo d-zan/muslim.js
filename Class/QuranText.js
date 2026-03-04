@@ -42,7 +42,12 @@ class QuranText extends BaseQuranText {
   juz(juz_number) {
 
   }
-
-  full() {}
+/**
+ * Get a full version of Quran
+ * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
+ */
+  async full() {
+    return await this.getFullQuran();
+  }
 }
 module.exports = QuranText;

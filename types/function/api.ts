@@ -1,24 +1,24 @@
 import { QuranFullText, SurahText, TextEdition } from "../quran/";
-interface SurahAPITextInterface {
+interface SurahTextAPI {
 code: number;
 status: string;
 data:SurahText;
 }
-interface EditionAPITextInterface {
+interface TextEditionAPI {
 code: number;
 status: string;
 data: TextEdition[];
 };
-interface FullQuranAPITextInterface {
+interface FullQuranTextAPI {
 code: number;
 status: string;
 data: QuranFullText
 }
 export type QuranAPIEndpoints = "surah" | "edition?format=text" | "quran" | "meta";
-export interface QuranApiEndpointMap {
-"surah": SurahAPITextInterface;
-"edition?format=text": EditionAPITextInterface;
-"quran": FullQuranAPITextInterface;
+export interface QuranAPIEndpointMap {
+"surah": SurahTextAPI;
+"edition?format=text": TextEditionAPI;
+"quran": FullQuranTextAPI;
 "meta": any;
 }
 //export async function quranAPI(domain: QuranAPIDomains,version: "v1", type: T, content:string) { return Promise<Response> };
