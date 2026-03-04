@@ -1,12 +1,7 @@
-//#region Prayer
-
-//#endregion
-
-//#region Hijri
-
-//#endregion
-
-//#region AsmaAllahHusna
-
-
-//#endregion
+export * from "./asmaAllahHusna";
+export * from "./hijri";
+export * from "./prayer";
+//export * from "./quran/";
+//export * from "./quran/types/";
+//export * from "./function";
+//export * from "./types";

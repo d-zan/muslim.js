@@ -1,5 +1,10 @@
-import { QuranFormat, QuranReadDirection, QuranType } from './index';
-import { QuranNameText, QuranEnglishName, QuranIdentifierText, QuranLanguageText  } from './types/quranText';
+import { QuranFormat, QuranReadDirection, QuranType } from "./index";
+import {
+  QuranNameText,
+  QuranEnglishName,
+  QuranIdentifierText,
+  QuranLanguageText,
+} from "./types/text";
 import {
   SurahNames,
   SurahEnglishNames,
@@ -16,9 +21,6 @@ export interface TextEdition {
   format: "text";
   type: QuranType;
 }
-
-
-
 
 export interface AyahText {
   number: number;
@@ -39,5 +41,17 @@ export interface SurahText {
   englishNameTranslation: SurahEnglishNameTranslation;
   revelationType: SurahRevelationType;
   ayahs: AyahText[];
+  edition: TextEdition;
+}
+export interface QuranSurahText {
+  number: number;
+  name: SurahNames;
+  englishName: SurahEnglishNames;
+  englishNameTranslation: SurahEnglishNameTranslation;
+  revelationType: SurahRevelationType;
+  ayahs: AyahText[];
+}
+export interface QuranFullText {
+  surahs: QuranSurahText[];
   edition: TextEdition;
 }

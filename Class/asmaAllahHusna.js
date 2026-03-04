@@ -11,7 +11,7 @@ class AsmaAllahHusnaError extends Error {
 class AsmaAllahHusna {
   /**
    * Get all the Asma Allah Husna - Returns the Arabic text with transliteration and meaning of each name
-   * @returns {import("../types/index").AsmaAllahHusna[]}
+   * @returns {import("../types/").AsmaAllahHusna[]}
    */
   all() {
     return AllahNames;
@@ -19,7 +19,7 @@ class AsmaAllahHusna {
   /**
    * Returns the Arabic text with transliteration and meaning
    * @param {number} number 1-99
-   * @returns {import("../types/asmaAllahHusna").AsmaAllahHusna}
+   * @returns {import("../types/").AsmaAllahHusna}
    */
   byNumber(number) {
     const names = AllahNames.find((name) => name.number === number);
@@ -31,7 +31,7 @@ class AsmaAllahHusna {
   }
   /**
     * Returns the Arabic text with transliteration and meaning
-   @param {import("../types/asmaAllahHusna").AllahNames['ar']} arabic_name 
+   @param {import("../types/").AllahNames['ar']} arabic_name 
   */
   byArabicName(arabic_name) {
     const name = AllahNames.find((name) => name.name === arabic_name);

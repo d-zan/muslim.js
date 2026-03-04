@@ -1,7 +1,7 @@
 //const api = 'https://api.aladhan.com/v1/gToHCalendar/1/2025'
 //const axios = require("axios");
 const BaseHijri = require("../Base/baseHijri.js");
-const getAPI = require("../Function/getApi.js");
+const getAPI = require("../Function/API/getApi.js");
 class HijriError extends Error {
   get name() {
     return "HijriError";
@@ -17,7 +17,7 @@ class Hijri extends BaseHijri {
 
   /**
    * Get the next upcoming holiday in the Hijri calendar
-   * @returns {Promise<import("../types/hijri.js").NextHijriHoliday>}
+   * @returns {Promise<import("../types/").NextHijriHoliday>}
    */
   async getNextHijriHoliday() {
     const api = "https://api.aladhan.com/v1/nextHijriHoliday";
@@ -86,7 +86,7 @@ class Hijri extends BaseHijri {
   }
   /**
    * Returns a list of special days as per Hijri calendar
-   * @returns {Promise<import("../types/hijri.js").SpecialDays[]>}
+   * @returns {Promise<import("../types/").SpecialDays[]>}
    */
   async getSpecialDays() {
     const api = "https://api.aladhan.com/v1/specialDays";
@@ -96,7 +96,7 @@ class Hijri extends BaseHijri {
   /**
    * Returns a list of holidays as per the Hijri year
    * @param {number} year ex: 1444,1446,1445
-   * @returns {Promise<import("../types/hijri.js").HijriHolidaysByYear[]>}
+   * @returns {Promise<import("../types/").HijriHolidaysByYear[]>}
    */
   async getHijriHolidaysByYear(year) {
     if (!year) {

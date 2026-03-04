@@ -1,4 +1,4 @@
-type QuranNamesAudio = 
+export type QuranNamesAudio = 
 | "عبد الباسط عبد الصمد المرتل"
 | "عبد الله بصفر"
 | "عبدالرحمن السديس"

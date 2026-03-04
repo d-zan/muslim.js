@@ -1,5 +1,5 @@
 //! SOON
-type QuranLanguage =
+export type QuranLanguage =
   | "ar"
   | "am"
   | "az"
@@ -43,7 +43,7 @@ type QuranLanguage =
   | "uz";
 
 //! SOON
-type QuranIdentifier =
+export type QuranIdentifier =
   | "ar.muyassar"
   | "az.mammadaliyev"
   | "az.musayev"
@@ -222,7 +222,7 @@ type QuranIdentifier =
 
 
 //! SOON
-type QuranNames =
+export type QuranNames =
   | "تفسير المیسر"
   | "Məmmədəliyev & Bünyadov"
   | "Musayev"

@@ -14,29 +14,35 @@ class AlQuranCloudAPIError extends Error {
  */
 class QuranText extends BaseQuranText {
   /**
-   * @param {import("../types/quran/types/quranText").QuranNameText} quran
-   * @param {import("../types/quran/index").QuranAdvancedOptions} [options]
+   * @param {import("../types/quran").QuranNameText} quran
+   * @param {import("../types/quran").QuranAdvancedOptions} [options]
    */
   constructor(quran, options) {
     super(quran, options);
     this.quran = quran;
   }
-  full() {}
-  juz() {}
-  /**
-   * Get a Surah from Quran
-   * @param {import("../types/quran/types/surah").SurahNames | number} surah - The Surah name or the number.
-   */
-  async surah(surah) {
-    return await this.getSurah(surah);
-  }
-
   /**
    * Information about this Quran edition.
-   * @param {import("../types/quran/types/quranText").QuranIdentifierText} [edition] - Another edition?
+   * @param {import("../types/quran").QuranIdentifierText} [edition] - Another edition?
    */
   async editionInfo(edition = this.edition) {
     return await this.getIdentifierInfo(edition);
   }
+  /**
+   * Get a Surah from Quran
+   * @param {import("../types/quran").SurahNames | number} surah - The Surah name or the number.
+   */
+  async surah(surah) {
+    return await this.getSurah(surah);
+  }
+  /**
+   * Get Juz in Quran
+   * @param {number} juz_number 
+   */
+  juz(juz_number) {
+
+  }
+
+  full() {}
 }
 module.exports = QuranText;

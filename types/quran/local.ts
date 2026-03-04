@@ -1,14 +1,5 @@
-export type QuranType =
-  | "tafsir"
-  | "translation"
-  | "quran"
-  | "transliteration"
-  | "versebyverse";
-export type QuranFormat = "text" | "audio";
-export type QuranReadDirection = "rtl" | "ltr" | null;
-
-export type LocalQuranLanguage = "ar" | "en";
-export type LocalQuranIdentifier = "ar.muyassar" | "en.asad" | "quran-simple";
+import { QuranFormat, QuranReadDirection, QuranType } from "./";
+import { LocalQuranIdentifier, LocalQuranLanguage } from "./types/";
 /*
 export type LocalQuranName =
   | (typeof import("../Data/Quran/Editions/ar.json"))[0]["name"]

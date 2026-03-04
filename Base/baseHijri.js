@@ -1,4 +1,4 @@
-const getAPI = require("../Function/getApi");
+const getAPI = require("../Function/API/getApi");
 const hijriMonth = require("../Data/HijriMonths.json");
 class HijriError extends Error {
   get name() {
@@ -74,7 +74,7 @@ class BaseHijri {
        * Get a Hijri calendar from a Gregorian month and year
        * @param {number} [month_in_gregorian] - ex: 1,2,3
        * @param {number} [year_in_gregorian] -  ex: 2025,1947,1972
-       * @returns {Promise<import("../types/hijri").GregorianToHijriCalendar[]>}
+       * @returns {Promise<import("../types/").GregorianToHijriCalendar[]>}
        */
       async gregorianToHijri(month_in_gregorian, year_in_gregorian) {
         calendarQuick(month_in_gregorian, year_in_gregorian);
@@ -88,7 +88,7 @@ class BaseHijri {
        * Get a Gregorian calendar from Hijri month and year
        * @param {number} month_in_hijri - ex: 1,2,3
        * @param {number} year_in_hijri -  ex: 1444,1446
-       * @returns {Promise<import("../types/hijri").GregorianToHijriCalendar[]>}
+       * @returns {Promise<import("../types/").GregorianToHijriCalendar[]>}
        */
       async hijriToGregorian(month_in_hijri, year_in_hijri) {
         calendarQuick(month_in_hijri, year_in_hijri);
@@ -109,7 +109,7 @@ class BaseHijri {
        * @param {number} day_in_gregorian - 1>31
        * @param {number} month_in_gregorian - 1>12
        * @param {number} year_in_gregorian - Ex: 2020, 1972
-       * @returns {Promise<import("../types/hijri").ConvertGregorianDateToHijriDate>}
+       * @returns {Promise<import("../types/").ConvertGregorianDateToHijriDate>}
        */
       async GregorianToHijri(
         day_in_gregorian,
@@ -131,7 +131,7 @@ class BaseHijri {
        * @param {number} day_in_hijri - 1>30
        * @param {number} month_in_hijri - 1>12
        * @param {number} year_in_hijri - Ex: 1444, 1429
-       * @returns {Promise<import("../types/hijri").ConvertHijriDateToGregoriaDate>}
+       * @returns {Promise<import("../types/").ConvertHijriDateToGregoriaDate>}
        */
       async HijriToGregorian(day_in_hijri, month_in_hijri, year_in_hijri) {
         convertQuick(day_in_hijri, month_in_hijri, year_in_hijri, true);
@@ -150,7 +150,7 @@ class BaseHijri {
     return {
       /**
        * Get all islamic months
-       * @returns {import("../types/hijri").IslamicMonths}
+       * @returns {import("../types/").IslamicMonths}
        */
       all() {
         return hijriMonth;
@@ -158,7 +158,7 @@ class BaseHijri {
       /**
        * Get a specific month by its number.
        * @param {1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12} number_of_month - 1>12
-       * @returns {import("../types/hijri").IslamicMonth}
+       * @returns {import("../types/").IslamicMonth}
        */
        get(number_of_month) {
         if (number_of_month > 12) {

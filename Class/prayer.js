@@ -18,8 +18,7 @@ class AladhanAPIError extends Error {
     return "AladhanAPIError";
   }
 }
-const api =
-  "https://api.aladhan.com/v1/timingsByCity?city=Cairo&country=EG&method=5";
+//const api ="https://api.aladhan.com/v1/timingsByCity?city=Cairo&country=EG&method=5";
 /**
  * One class to open pray door
  */
@@ -27,7 +26,7 @@ class Prayer extends BasePrayer {
   /**
    * @param {string} city - ex: Cairo, London
    * @param {string} country - ex: EG, UK - A country name or 2 character alpha ISO 3166 code
-   * @param {import("../types/prayer").Method} method - A prayer times calculation method
+   * @param {import("../types/").Method} method - A prayer times calculation method
    */
   constructor(city, country, method) {
     if (!city) throw new PrayerError("City option is require");
@@ -42,7 +41,7 @@ class Prayer extends BasePrayer {
   /**
   Get all pray time
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
-   * @returns {Promise<import("../types/prayer").AllPrayTime>}
+   * @returns {Promise<import("../types/").AllPrayTime>}
    */
   async getAllPrayTime(ToAM_PM) {
     const api = `https://api.aladhan.com/v1/timingsByCity?city=${this.city}&country=${this.country}&method=${this.method}`;
@@ -67,7 +66,7 @@ class Prayer extends BasePrayer {
   @private
    * Returns next prayer time for a specific date by address
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
-   * @returns {Promise<import('../types/prayer').NextPray>}
+   * @returns {Promise<import('../types/').NextPray>}
    */
   async getNextPrayTimeByAddress(ToAM_PM) {
     const now = new Date();
@@ -167,7 +166,7 @@ class Prayer extends BasePrayer {
   /**
    * Returns next prayer time for a specific date
    * @param {boolean} [ToAM_PM] - Convert time to AM & PM System
-   * @returns {Promise<import('../types/prayer').NextPray>}
+   * @returns {Promise<import('../types/').NextPray>}
    */
   async getNextPrayTime(ToAM_PM) {
     const now = new Date();
