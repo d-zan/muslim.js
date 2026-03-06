@@ -11,13 +11,18 @@ class AlQuranCloudAPIError extends Error {
 }
 /**
  * Get anything in Quran with text format
- */
+*/
+/**
+@template {keyof import("../types/function").QuranTextNamesByLanguage} T
+@implements {import("../types/function").QuranText<T>}
+*/
 class QuranText extends BaseQuranText {
   /**
-   * @param {import("../types/quran").QuranNameText} quran
-   * @param {import("../types/quran").QuranAdvancedOptions} [options]
-   */
-  constructor(quran, options) {
+  @param {T} language 
+  @param {import("../types/function").QuranTextNamesByLanguage[T]} quran 
+  @param {import("../types/quran").QuranAdvancedOptions} options 
+  */
+  constructor(language, quran, options) {
     super(quran, options);
     this.quran = quran;
   }
@@ -39,15 +44,13 @@ class QuranText extends BaseQuranText {
    * Get Juz in Quran
    * @param {number} juz_number 
    */
-  juz(juz_number) {
-
-  }
+  juz(juz_number) {}
 /**
  * Get a full version of Quran
  * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
  */
-  async full() {
-    return await this.getFullQuran();
+  async full(edition = this.edition) {
+    return await this.getFullQuran(edition);
   }
 }
 module.exports = QuranText;
