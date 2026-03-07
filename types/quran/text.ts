@@ -55,3 +55,38 @@ export interface QuranFullText {
   surahs: QuranSurahText[];
   edition: TextEdition;
 }
+interface SurahJuzText {
+number:number;
+name:SurahNames;
+englishName: SurahEnglishNames;
+englishNameTranslation: SurahEnglishNameTranslation;
+revelationType: SurahRevelationType;
+numberOfAyahs:number;
+}
+
+interface AyahJuzText {
+  number:number;
+  text:string;
+  surah: SurahJuzText;
+  numberInSurah:number;
+  juz:number;
+  manzil:number;
+  page:number;
+  ruku:number;
+  hizbQuarter:number;
+  sajda:boolean;
+}
+
+export interface JuzText {
+number:number;
+ayahs:AyahJuzText[];
+surahs: {
+  [number:string]: SurahJuzText
+};
+
+edition:TextEdition;
+}
+
+
+
+
