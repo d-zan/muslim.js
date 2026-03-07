@@ -1,6 +1,6 @@
-const { time, timeEnd } = require("console");
-const identifierByName = require("../JS/identifierByName");
-const SurahNumberByName = require("../JS/SurahNumberByName");
+//const { time, timeEnd } = require("console");
+const identifierByName = require("../Tools/identifierByName");
+const SurahNumberByName = require("../Tools/SurahNumberByName");
 const quranAPI = require("../Function/API/quranApi");
 const quranAPIData = require("../Function/API/quranAPIData");
 
@@ -47,7 +47,7 @@ class BaseQuranText {
     const json = await quranAPIData(this.domain,"v1","quran",edition);
     if (!res.ok) {
         const api = json;
-        throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
+        throw new AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
       }
 
       return json.data;
@@ -75,7 +75,7 @@ class BaseQuranText {
 
       if (!res.ok) {
         const api = json;
-        throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
+        throw new AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
       }
 
       return json.data;
@@ -92,7 +92,7 @@ class BaseQuranText {
 
       if (!res.ok) {
         const api = json;
-        throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
+        throw new AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
       }
 
       return json.data;
@@ -124,7 +124,7 @@ class BaseQuranText {
     const json = await quranAPIData(this.domain, "v1", "edition?format=text");
     if (!res.ok) {
       const api = json;
-      throw AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
+      throw new AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
     }
 
     // time("How much time by find");
