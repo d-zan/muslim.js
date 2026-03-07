@@ -1,4 +1,4 @@
-const MethodNumber = require('../JS/MethodNumber');
+const MethodNumber = require('../Tools/MethodNumber');
 class MethodError extends Error {
   get name() {
     return "MethodError";

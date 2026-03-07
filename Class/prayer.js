@@ -3,9 +3,9 @@ const {
   converttoAMPM,
   convertOneToAMPM,
 } = require("../Function/converttoAMPM");
-const StatusCode = require("../JS/StatusCode");
-const MethodNumber = require("../JS/MethodNumber");
-const MethodName = require("../JS/MethodName");
+const StatusCode = require("../Tools/StatusCode.js");
+const MethodNumber = require("../Tools/MethodNumber.js");
+const MethodName = require("../Tools/MethodName.js");
 const getMethodName = require("../Function/getMethodName");
 const BasePrayer = require("../Base/basePrayer.js");
 class PrayerError extends Error {

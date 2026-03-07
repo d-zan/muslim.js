@@ -59,7 +59,7 @@ export interface MethodNumber {
   Custom: 99;
 }
 export type MethodNumberType = MethodNumber[Method];
-export type MethodName = typeof import("../JS/MethodName")[MethodNumberType];
+export type MethodName = typeof import("../Tools/MethodName")[MethodNumberType];
 /**
  *!0 - Jafari / Shia Ithna-Ashari
  *!1 - University of Islamic Sciences, Karachi
