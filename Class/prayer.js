@@ -31,8 +31,7 @@ class Prayer extends BasePrayer {
   constructor(city, country, method) {
     if (!city) throw new PrayerError("City option is require");
     if (!country) throw new PrayerError("Country option is require");
-    if (country.length !== 2)
-      throw new PrayerError("Country option length must be 2");
+    if (country.length !== 2) throw new PrayerError("Country option length must be 2");
     if (!method) throw new PrayerError("Method option is require");
     super(city, country, method);
 
