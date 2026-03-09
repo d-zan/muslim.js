@@ -13,12 +13,12 @@ class AlQuranCloudAPIError extends Error {
   }
 }
 /**
-*/
+ */
 /**
-* Get anything in Quran with text format
-@template {keyof import("../types/function").QuranTextNamesByLanguage} T
-@implements {import("../types/function").QuranText<T>}
-*/
+ * Get anything in Quran with text format
+ * @template {keyof import("../types/function").QuranTextNamesByLanguage} T
+ * @implements {import("../types/function").QuranText<T>}
+ */
 class QuranText extends BaseQuranText {
   /**
   @param {T} language 
@@ -44,32 +44,28 @@ class QuranText extends BaseQuranText {
     return await this.getSurah(surah);
   }
   /**
-   * Get Juz in Quran
-   * @param {number | "random"} juz_number min: 1, max: 30.
+   * Get Juz in Quran,
+   * @param {number | "random" | import("../types/quran").JuzAdvancedOptions} juz 
+   * - number: min: 1, max: 30.
+   * - string: "random".
+   * - Advanced: 
+  @default juz.domain : "api.alquran.cloud";
+  @default juz.identifier : "quran-uthmani-quran-academy";
+  @default juz.number : "random";
+  @example
+  <QuranText>.juz({
+  domain: "api.alquran.cloud",
+  identifier:"quran-uthmani-quran-academy",
+  number: 1 //the number of juz.
+  });
    */
- async juz(juz_number) {
-  if (typeof juz_number === "string" && juz_number === "random") {
-    const number = randomInt(1,30);
-    const res = await quranAPI(this.domain,"v1","juz",number+"/"+ this.edition);
-    const json = await quranAPIData(this.domain,"v1","juz",number+"/"+ this.edition);
-    if (!res.ok) {
-     const api = json;
-     throw new AlQuranCloudAPIError(`(${api.code})[${api.status}]: ${api.data}`);
-    }
-///TODO: Complete here>>>>>
-  } else {
-    if (!juz_number) {
-      throw new QuranTextError("[JUZ_NUMBER_NOT_FOUND]: Add a number between 1 to 30.");
-    }
-    if (juz_number < 1 || juz_number > 30) {
-      throw new QuranTextError("[JUZ_NUMBER_VALUE]: The min value of 'juz_number' is 1 and the max value is 30.");
-    } 
+  async juz(juz) {
+    return this.getJuz(juz);
   }
-}
-/**
- * Get a full version of Quran
- * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
- */
+  /**
+   * Get a full version of Quran
+   * @param {import("../types/quran/").QuranIdentifierText} [edition] - Another edition?
+   */
   async full(edition = this.edition) {
     return await this.getFullQuran(edition);
   }

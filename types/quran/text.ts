@@ -83,7 +83,6 @@ ayahs:AyahJuzText[];
 surahs: {
   [number:string]: SurahJuzText
 };
-
 edition:TextEdition;
 }
 

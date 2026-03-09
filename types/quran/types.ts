@@ -1,3 +1,6 @@
+import { TextEdition } from "./text";
+import { QuranIdentifierText } from "./types/text";
+
 export type QuranType =
   | "tafsir"
   | "translation"
@@ -13,4 +16,10 @@ export type QuranAPIDomains =
   | "alquran.api.alislam.ru";
 export interface QuranAdvancedOptions {
   domain: QuranAPIDomains;
+}
+
+export interface JuzAdvancedOptions {
+  domain: QuranAPIDomains;
+  identifier: QuranIdentifierText;
+  number: number | "random";
 }
