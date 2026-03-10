@@ -2,4 +2,4 @@ exports.AsmaAllahHusna = require("./Class/asmaAllahHusna");
 exports.Hijri = require("./Class/Hijri");
 exports.Prayer = require("./Class/prayer");
 //Very soon
-//exports.QuranText = require("./Class/QuranText")
+//exports.QuranText = require("./Class/QuranText");

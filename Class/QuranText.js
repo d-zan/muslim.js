@@ -28,6 +28,7 @@ class QuranText extends BaseQuranText {
   constructor(language, quran, options) {
     super(language,quran, options);
   }
+
   /**
    * Information about this Quran edition.
    * @param {import("../types/quran").QuranIdentifierText} [edition] - Another edition?
@@ -35,6 +36,7 @@ class QuranText extends BaseQuranText {
   async editionInfo(edition = this.edition) {
     return await this.getIdentifierInfo(edition);
   }
+
   /**
    * Get a Surah from Quran
    * @param {import("../types/quran").SurahNames | number} surah - The Surah name or the number.
@@ -42,6 +44,7 @@ class QuranText extends BaseQuranText {
   async surah(surah) {
     return await this.getSurah(surah);
   }
+
   /**
    * Get Juz in Quran,
    * @param {number | "random" | import("../types/quran").JuzAdvancedOptions} juz 
@@ -71,7 +74,7 @@ class QuranText extends BaseQuranText {
   /**
 
    */
-  async search(keyword,surah,edition) {
+  async search(keyword,surah,type) {
 
   }
 }

@@ -56,38 +56,34 @@ export interface QuranFullText {
   edition: TextEdition;
 }
 
-
-
 //#region Juz Text
 export interface SurahJuzText {
-number:number;
-name:SurahNames;
-englishName: SurahEnglishNames;
-englishNameTranslation: SurahEnglishNameTranslation;
-revelationType: SurahRevelationType;
-numberOfAyahs:number;
+  number: number;
+  name: SurahNames;
+  englishName: SurahEnglishNames;
+  englishNameTranslation: SurahEnglishNameTranslation;
+  revelationType: SurahRevelationType;
+  numberOfAyahs: number;
 }
-
 export interface AyahJuzText {
-  number:number;
-  text:string;
+  number: number;
+  text: string;
   surah: SurahJuzText;
-  numberInSurah:number;
-  juz:number;
-  manzil:number;
-  page:number;
-  ruku:number;
-  hizbQuarter:number;
-  sajda:boolean;
+  numberInSurah: number;
+  juz: number;
+  manzil: number;
+  page: number;
+  ruku: number;
+  hizbQuarter: number;
+  sajda: boolean;
 }
-
 export interface JuzText {
-number:number;
-ayahs:AyahJuzText[];
-surahs: {
-  [number:string]: SurahJuzText
-};
-edition:TextEdition;
+  number: number;
+  ayahs: AyahJuzText[];
+  surahs: {
+    [number: string]: SurahJuzText;
+  };
+  edition: TextEdition;
 }
 //#endregion
 export interface MatchesTextEdition {
@@ -98,25 +94,21 @@ export interface MatchesTextEdition {
   type: QuranType;
 }
 export interface MatchesTextSurah {
-number:number;
-name:SurahNames;
-englishName: SurahEnglishNames;
-englishNameTranslation: SurahEnglishNameTranslation;
-revelationType: SurahRevelationType;
+  number: number;
+  name: SurahNames;
+  englishName: SurahEnglishNames;
+  englishNameTranslation: SurahEnglishNameTranslation;
+  revelationType: SurahRevelationType;
 }
 export interface MatchesText {
-  number:number;
+  number: number;
   text: string;
   edition: MatchesTextEdition;
- surah: MatchesTextSurah;
- numberInSurah: number;
+  surah: MatchesTextSurah;
+  numberInSurah: number;
 }
-
 
 export interface SearchText {
   count: number;
-  matches: MatchesText
+  matches: MatchesText;
 }
-
-
-
