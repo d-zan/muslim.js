@@ -1,5 +1,4 @@
-import { TextEdition } from "./text";
-import { QuranIdentifierText } from "./types/text";
+import { QuranIdentifierText, QuranLanguageText, SurahNames } from "./";
 
 export type QuranType =
   | "tafsir"
@@ -22,4 +21,10 @@ export interface JuzAdvancedOptions {
   domain: QuranAPIDomains;
   identifier: QuranIdentifierText;
   number: number | "random";
+}
+export interface SearchTextAdvancedOptions {
+  domain: QuranAPIDomains;
+  type: QuranLanguageText | QuranIdentifierText;
+  keyword: string;
+  surah: SurahNames| number | "random";
 }

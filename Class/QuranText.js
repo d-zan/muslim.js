@@ -72,10 +72,28 @@ class QuranText extends BaseQuranText {
     return await this.getFullQuran(edition);
   }
   /**
-
+   * @overload
+   * Searching about any word in the Quran.
+   * How work: 
+   - 1. Add the `keyword` then the `surah` 
+   - 2. In the finial you will add the `type` 
+   - 2.1 If you want search in all editions for the same language choose `language`
+   - 2.2 If you want search in the edition you already choose it: choose `edition`
+   * @param {string} keyword 
+   * @param {import("../types/quran").SurahNames | number} surah 
+   * @param {"language" | "edition"} type 
    */
   async search(keyword,surah,type) {
 
+  }
+  /**
+  * @param {import("../types/quran").SearchTextAdvancedOptions} options 
+  */
+  async search(options) {
+    if (options) {
+  const { type } = options;
+
+}
   }
 }
 module.exports = QuranText;

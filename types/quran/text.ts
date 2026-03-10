@@ -110,5 +110,5 @@ export interface MatchesText {
 
 export interface SearchText {
   count: number;
-  matches: MatchesText;
+  matches: MatchesText[];
 }
