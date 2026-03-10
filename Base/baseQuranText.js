@@ -18,11 +18,14 @@ class AlQuranCloudAPIError extends Error {
 
 class BaseQuranText {
   /**
+   * @template {keyof import("../types/function").QuranTextNamesByLanguage} T
+   * @param {T} language 
    * @param {import("../types/quran/").QuranNameText} quran
    * @param {import("../types/quran/").QuranAdvancedOptions} [options]
    */
-  constructor(quran, options) {
+  constructor(language,quran, options) {
     this.quran = quran;
+    this.language = language;
     if (options) {
       /** @private */
       this.thereAOption = true;
@@ -257,14 +260,13 @@ class BaseQuranText {
       );
     }
 
-    // time("How much time by find");
     const editions = json.data;
     const theEdition = editions.find((e) => e.identifier === edition);
-    //timeEnd("How much time by find");
     if (!theEdition) {
       throw new QuranTextError("[CANT_FOUND]: The Quran edition is undefined");
     }
     return theEdition;
   }
+
 }
 module.exports = BaseQuranText;

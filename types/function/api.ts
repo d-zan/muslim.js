@@ -1,4 +1,4 @@
-import { JuzText, QuranFullText, SurahText, TextEdition } from "../quran/";
+import { JuzText, QuranFullText, SurahText, TextEdition, SearchText } from "../quran/";
 interface SurahTextAPI {
   code: number;
   status: string;
@@ -19,6 +19,13 @@ interface JuzTextAPI {
   status: string;
   data: JuzText;
 }
+
+interface SearchTextAPI {
+  code: number;
+  status: string;
+  data: SearchText;
+}
+
 export type QuranAPIEndpoints =
   | "surah"
   | "edition?format=text"
@@ -31,4 +38,5 @@ export interface QuranAPIEndpointMap {
   "quran": FullQuranTextAPI;
   "juz": JuzTextAPI;
   "meta": any;
+  'search': SearchTextAPI;
 }

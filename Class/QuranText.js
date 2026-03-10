@@ -26,8 +26,7 @@ class QuranText extends BaseQuranText {
   @param {import("../types/quran").QuranAdvancedOptions} options 
   */
   constructor(language, quran, options) {
-    super(quran, options);
-    this.quran = quran;
+    super(language,quran, options);
   }
   /**
    * Information about this Quran edition.
@@ -68,6 +67,12 @@ class QuranText extends BaseQuranText {
    */
   async full(edition = this.edition) {
     return await this.getFullQuran(edition);
+  }
+  /**
+
+   */
+  async search(keyword,surah,edition) {
+
   }
 }
 module.exports = QuranText;

@@ -43,7 +43,7 @@ export interface SurahText {
   ayahs: AyahText[];
   edition: TextEdition;
 }
-export interface QuranSurahText {
+export interface SurahQuranFullText {
   number: number;
   name: SurahNames;
   englishName: SurahEnglishNames;
@@ -52,10 +52,14 @@ export interface QuranSurahText {
   ayahs: AyahText[];
 }
 export interface QuranFullText {
-  surahs: QuranSurahText[];
+  surahs: SurahQuranFullText[];
   edition: TextEdition;
 }
-interface SurahJuzText {
+
+
+
+//#region Juz Text
+export interface SurahJuzText {
 number:number;
 name:SurahNames;
 englishName: SurahEnglishNames;
@@ -64,7 +68,7 @@ revelationType: SurahRevelationType;
 numberOfAyahs:number;
 }
 
-interface AyahJuzText {
+export interface AyahJuzText {
   number:number;
   text:string;
   surah: SurahJuzText;
@@ -85,7 +89,34 @@ surahs: {
 };
 edition:TextEdition;
 }
+//#endregion
+export interface MatchesTextEdition {
+  identifier: QuranIdentifierText;
+  name: QuranNameText;
+  englishName: QuranEnglishName;
+  language: QuranLanguageText;
+  type: QuranType;
+}
+export interface MatchesTextSurah {
+number:number;
+name:SurahNames;
+englishName: SurahEnglishNames;
+englishNameTranslation: SurahEnglishNameTranslation;
+revelationType: SurahRevelationType;
+}
+export interface MatchesText {
+  number:number;
+  text: string;
+  edition: MatchesTextEdition;
+ surah: MatchesTextSurah;
+ numberInSurah: number;
+}
 
+
+export interface SearchText {
+  count: number;
+  matches: MatchesText
+}
 
 
 
