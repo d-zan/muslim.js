@@ -77,9 +77,25 @@ const nameByArabicName = asma.byArabicName('الرحمن');
 console.log(nameByArabicName);
 ```
 
-### Quran Text (Soon)
+### Quran Text (Beta)
+To get Quran text, you can use the `QuranText` class
+```javascript
+const { QuranText } = require('muslim.js');
 
-To get Quran text.
+const quran = new QuranText('en', 'Sahih International');
+
+// Get information about the Quran edition
+quran.editionInfo().then(console.log);
+
+// Get a specific surah
+quran.surah(1).then(console.log);
+
+// Get a specific juz
+quran.juz(1).then(console.log);
+
+// Get the full text of the Quran
+quran.full().then(console.log);
+```
 
 ## Contributing
 
