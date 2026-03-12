@@ -25,4 +25,5 @@ const MethodName = {
   23: "JORDAN",
   99: "CUSTOM",
 };
+/** @private */
 module.exports = MethodName;

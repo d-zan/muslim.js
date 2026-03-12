@@ -64,4 +64,5 @@ const StatusCode = {
     '510': 'Not Extended',
     '511': 'Network Authentication Required',
 }
+/** @private */
 module.exports = StatusCode;

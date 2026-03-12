@@ -115,4 +115,5 @@ const SurahNumberByName = {
   "سُورَةُ الفَلَقِ": 113,
   "سُورَةُ النَّاسِ": 114,
 };
+/** @private */
 module.exports = SurahNumberByName;

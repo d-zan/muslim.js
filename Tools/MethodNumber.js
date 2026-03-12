@@ -29,4 +29,5 @@ const MethodNumber = {
     //See https://aladhan.com/calculation-methods
     "Custom": 99,
   }
+  /** @private */
   module.exports = MethodNumber;

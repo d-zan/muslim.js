@@ -168,5 +168,5 @@ const identifierByName = {
 "Chechen by Magomedov": "ce.magomedov",
 "Транскрипция": "ru.transliteration",
 };
-
+/** @private */
 module.exports = identifierByName;
