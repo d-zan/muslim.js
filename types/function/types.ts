@@ -6,7 +6,5 @@ export type quranAPIJSON = <T extends keyof QuranAPIEndpointMap>(domain: QuranAP
 
 export declare class QuranText<T extends keyof QuranTextNamesByLanguage> {
     constructor(language:T, quran:QuranTextNamesByLanguage[T], options:QuranAdvancedOptions);
-    search(options:SearchTextAdvancedOptions): Promise<SearchText>;
-    search(keyword:string, surah: SurahNames | number, type: "language" | "edition"): Promise<SearchText>;
 }
 

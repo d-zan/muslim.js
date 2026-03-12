@@ -1,20 +1,15 @@
-const AllahNames = require("../Data/AsmaAllah.json");
-
-class AsmaAllahHusnaError extends Error {
-  get name() {
-    return "AsmaAllahHusnaError";
-  }
-}
+const {AsmaAllahJSON} = require("../Data");
+const { AsmaAllahHusnaError } = require("../Tools");
 /**
  * The 99 names of Allah, in English and Arabic.
  */
 class AsmaAllahHusna {
   /**
-   * Get all the Asma Allah Husna - Returns the Arabic text with transliteration and meaning of each name
+   * Get the 99 names of Allah - Returns the Arabic text with transliteration and meaning of each name
    * @returns {import("../types/").AsmaAllahHusna[]}
    */
   all() {
-    return AllahNames;
+    return AsmaAllahJSON;
   }
   /**
    * Returns the Arabic text with transliteration and meaning
@@ -22,7 +17,7 @@ class AsmaAllahHusna {
    * @returns {import("../types/").AsmaAllahHusna}
    */
   byNumber(number) {
-    const names = AllahNames.find((name) => name.number === number);
+    const names = AsmaAllahJSON.find((name) => name.number === number);
     if (!names)
       throw new AsmaAllahHusnaError(
         "[NOT_FOUND]: Invalid number, it must be between 1 and 99."
@@ -34,7 +29,7 @@ class AsmaAllahHusna {
    @param {import("../types/").AllahNames['ar']} arabic_name 
   */
   byArabicName(arabic_name) {
-    const name = AllahNames.find((name) => name.name === arabic_name);
+    const name = AsmaAllahJSON.find((name) => name.name === arabic_name);
     if (!name) throw new Error("Name not found");
     return name;
   }

@@ -26,5 +26,5 @@ export interface SearchTextAdvancedOptions {
   domain: QuranAPIDomains;
   type: QuranLanguageText | QuranIdentifierText;
   keyword: string;
-  surah: SurahNames| number | "random";
+  surah: SurahNames | number | "random";
 }

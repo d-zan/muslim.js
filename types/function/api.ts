@@ -1,29 +1,32 @@
 import { JuzText, QuranFullText, SurahText, TextEdition, SearchText } from "../quran/";
+
 interface SurahTextAPI {
   code: number;
   status: string;
-  data: SurahText;
+  data: SurahText | string;
 }
 interface TextEditionAPI {
   code: number;
   status: string;
-  data: TextEdition[];
+  data: TextEdition[] | string;
 }
+
 interface FullQuranTextAPI {
   code: number;
   status: string;
-  data: QuranFullText;
+  data: QuranFullText | string;
 }
+
 interface JuzTextAPI {
   code: number;
   status: string;
-  data: JuzText;
+  data: JuzText | string;
 }
 
 interface SearchTextAPI {
   code: number;
   status: string;
-  data: SearchText;
+  data: SearchText | string ;
 }
 
 export type QuranAPIEndpoints =

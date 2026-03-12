@@ -1,14 +1,11 @@
 //const api = 'https://api.aladhan.com/v1/gToHCalendar/1/2025'
 //const axios = require("axios");
 const BaseHijri = require("../Base/baseHijri.js");
-const getAPI = require("../Function/API/getApi.js");
-class HijriError extends Error {
-  get name() {
-    return "HijriError";
-  }
-}
+const { getAPI } = require("../Function");
+const { HijriError } = require("../Tools");
 /**
- *
+- Anything you want for the Hijri Calendar
+- Get Hijri/Gregorian calendar and convert dates between them.
  */
 class Hijri extends BaseHijri {
   constructor() {

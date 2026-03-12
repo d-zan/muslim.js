@@ -1,9 +1,5 @@
-const MethodNumber = require('../Tools/MethodNumber');
-class MethodError extends Error {
-  get name() {
-    return "MethodError";
-  }
-}
+const {MethodNumber, MethodError} = require('../Tools');
+
 /**
 * @private
 * @param {import("../types/prayer").Method} method

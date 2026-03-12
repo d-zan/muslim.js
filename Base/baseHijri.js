@@ -1,66 +1,63 @@
-const getAPI = require("../Function/API/getApi");
-const hijriMonth = require("../Data/HijriMonths.json");
-class HijriError extends Error {
-  get name() {
-    return "HijriError";
-  }
-}
+const { getAPI } = require("../Function");
+const { hijriMonthsJSON } = require("../Data");
+const { BaseHijriError } = require("../Tools");
+
 function calendarQuick(m, y) {
   if (typeof m !== "number") {
-    throw new HijriError("[TYPE_ERROR]: Month is must be a number.");
+    throw new BaseHijriError("[TYPE_ERROR]: Month is must be a number.");
   }
   if (typeof y !== "number") {
-    throw new HijriError("[TYPE_ERROR]: Year is must be a number.");
+    throw new BaseHijriError("[TYPE_ERROR]: Year is must be a number.");
   }
   if (!m) {
-    throw new HijriError("[NOT_FOUND]: Month is require.");
+    throw new BaseHijriError("[NOT_FOUND]: Month is require.");
   } else {
     if (m > 12) {
-      throw new HijriError("[INVALID_NUMBER]: Max value of month is 12.");
+      throw new BaseHijriError("[INVALID_NUMBER]: Max value of month is 12.");
     } else {
       if (m === 0)
-        throw new HijriError("[INVALID_NUMBER]: Min value of month is 1.");
+        throw new BaseHijriError("[INVALID_NUMBER]: Min value of month is 1.");
     }
   }
   if (!y) {
-    throw new HijriError("[NOT_FOUND]: Year is require.");
+    throw new BaseHijriError("[NOT_FOUND]: Year is require.");
   }
 }
 function convertQuick(d, m, y, hijri) {
   if (typeof d !== "number") {
-    throw new HijriError("[TYPE_ERROR]: Day is must be a number.");
+    throw new BaseHijriError("[TYPE_ERROR]: Day is must be a number.");
   } else if (typeof m !== "number") {
-    throw new HijriError("[TYPE_ERROR]: Month is must be a number.");
+    throw new BaseHijriError("[TYPE_ERROR]: Month is must be a number.");
   } else if (typeof y !== "number") {
-    throw new HijriError("[TYPE_ERROR]: Year is must be a number.");
+    throw new BaseHijriError("[TYPE_ERROR]: Year is must be a number.");
   }
   if (!m) {
-    throw new HijriError("[NOT_FOUND]: Month is require.");
+    throw new BaseHijriError("[NOT_FOUND]: Month is require.");
   } else {
     if (m > 12) {
-      throw new HijriError("[INVALID_NUMBER]: Max value of month is 12.");
+      throw new BaseHijriError("[INVALID_NUMBER]: Max value of month is 12.");
     } else if (m === 0) {
-      throw new HijriError("[INVALID_NUMBER]: Min value of month is 1.");
+      throw new BaseHijriError("[INVALID_NUMBER]: Min value of month is 1.");
     }
   }
   if (!d) {
-    throw new HijriError("[NOT_FOUND]: Day is require.");
+    throw new BaseHijriError("[NOT_FOUND]: Day is require.");
   } else {
     if (hijri) {
       if (d > 30) {
-        throw new HijriError("[INVALID_NUMBER]: Max value of day is 30.");
+        throw new BaseHijriError("[INVALID_NUMBER]: Max value of day is 30.");
       } else if (d === 0) {
-        throw new HijriError("[INVALID_NUMBER]: Min value of day is 1.");
+        throw new BaseHijriError("[INVALID_NUMBER]: Min value of day is 1.");
       }
     } else {
       if (d > 31) {
-        throw new HijriError("[INVALID_NUMBER]: Max value of day is 31.");
+        throw new BaseHijriError("[INVALID_NUMBER]: Max value of day is 31.");
       } else if (d === 0) {
-        throw new HijriError("[INVALID_NUMBER]: Min value of day is 1.");
+        throw new BaseHijriError("[INVALID_NUMBER]: Min value of day is 1.");
       }
     }
   }
-  if (!y) throw new HijriError("[NOT_FOUND]: Year is require.");
+  if (!y) throw new BaseHijriError("[NOT_FOUND]: Year is require.");
 }
 class BaseHijri {
   //constructor(){ super() }
@@ -114,13 +111,13 @@ class BaseHijri {
       async GregorianToHijri(
         day_in_gregorian,
         month_in_gregorian,
-        year_in_gregorian
+        year_in_gregorian,
       ) {
         convertQuick(
           day_in_gregorian,
           month_in_gregorian,
           year_in_gregorian,
-          false
+          false,
         );
         const api = `https://api.aladhan.com/v1/gToH/${day_in_gregorian}-${month_in_gregorian}-${year_in_gregorian}`;
         const res = await getAPI(api);
@@ -141,7 +138,7 @@ class BaseHijri {
       },
     };
   }
-    /**
+  /**
    * Get all or one Islamic months as per Hijri calendar
    */
   get islamicMonths() {
@@ -153,18 +150,20 @@ class BaseHijri {
        * @returns {import("../types/").IslamicMonths}
        */
       all() {
-        return hijriMonth;
+        return hijriMonthsJSON;
       },
       /**
        * Get a specific month by its number.
        * @param {1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12} number_of_month - 1>12
        * @returns {import("../types/").IslamicMonth}
        */
-       get(number_of_month) {
+      get(number_of_month) {
         if (number_of_month > 12) {
-          throw new HijriError("[INVALID_NUMBER]: Max value of month is 12.");
+          throw new BaseHijriError(
+            "[INVALID_NUMBER]: Max value of month is 12.",
+          );
         }
-        return hijriMonth[number_of_month];
+        return hijriMonthsJSON[number_of_month];
       },
     };
   }

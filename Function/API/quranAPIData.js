@@ -1,6 +1,6 @@
 /**
- * @type {import("../../types/function").quranAPIJSON}
  * @private
+ * @type {import("../../types/function").quranAPIJSON}
  * @param {import("../../types/quran/index").QuranAPIDomains} domain
  * @param {"v1"} version
  * @param {import("../../types/function/api").QuranAPIEndpoints} endpoint

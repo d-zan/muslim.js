@@ -1,8 +1,11 @@
 /**
+@template {keyof import("../../types/function").QuranAPIEndpointMap} T
+*/
+/**
  * @private
  * @param {import("../../types/quran/index").QuranAPIDomains} domain
  * @param {"v1"} version
- * @param {import("../../types/function/api").QuranAPIEndpoints} endpoint
+ * @param {T} endpoint
  * @param {string} [content]
  */
 async function quranAPI(domain, version = "v1", endpoint, content) {

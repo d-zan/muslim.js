@@ -1,6 +1,5 @@
-const getMethodName = require("../Function/getMethodName");
-const getMethodNumber = require("../Function/getMethodNumber");
-const prayerM = require("../Data/Prayer.json");
+const { getMethodName, getMethodNumber } = require("../Function");
+const { PrayerJSON } = require("../Data");
 class BasePrayer {
   /**
    * @param {string} city - ex: Cairo, London
@@ -16,14 +15,14 @@ class BasePrayer {
     let latitude = 0;
     const number = getMethodNumber(this.methods);
     const name = getMethodName(number);
-    latitude = prayerM[name].location.latitude;
+    latitude = PrayerJSON[name].location.latitude;
     return latitude;
   }
   get longitude() {
     let longitude = 0;
     const number = getMethodNumber(this.methods);
     const name = getMethodName(number);
-    longitude = prayerM[name].location.longitude;
+    longitude = PrayerJSON[name].location.longitude;
     return longitude;
   }
 }

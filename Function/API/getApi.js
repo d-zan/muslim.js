@@ -1,8 +1,5 @@
-class AladhanAPIError extends Error {
-  get name() {
-    return "AladhanAPIError";
-  }
-}
+const { AladhanAPIError } = require("../../Tools");
+
 /**
  * @param {string} api
  * @private

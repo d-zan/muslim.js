@@ -1,24 +1,16 @@
-const getMethodNumber = require("../Function/getMethodNumber");
+const { getMethodNumber, getMethodName } = require("../Function");
 const {
   converttoAMPM,
   convertOneToAMPM,
 } = require("../Function/converttoAMPM");
-const StatusCode = require("../Tools/StatusCode.js");
-const MethodNumber = require("../Tools/MethodNumber.js");
-const MethodName = require("../Tools/MethodName.js");
-const getMethodName = require("../Function/getMethodName");
+const {
+  MethodName,
+  StatusCode,
+  MethodNumber,
+  PrayerError,
+} = require("../Tools");
 const BasePrayer = require("../Base/basePrayer.js");
-class PrayerError extends Error {
-  get name() {
-    return "PrayerError";
-  }
-}
-class AladhanAPIError extends Error {
-  get name() {
-    return "AladhanAPIError";
-  }
-}
-//const api ="https://api.aladhan.com/v1/timingsByCity?city=Cairo&country=EG&method=5";
+
 /**
  * One class to open pray door
  */
@@ -31,7 +23,8 @@ class Prayer extends BasePrayer {
   constructor(city, country, method) {
     if (!city) throw new PrayerError("City option is require");
     if (!country) throw new PrayerError("Country option is require");
-    if (country.length !== 2) throw new PrayerError("Country option length must be 2");
+    if (country.length !== 2)
+      throw new PrayerError("Country option length must be 2");
     if (!method) throw new PrayerError("Method option is require");
     super(city, country, method);
 
