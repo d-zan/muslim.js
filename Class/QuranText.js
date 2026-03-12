@@ -62,6 +62,7 @@ class QuranText extends BaseQuranText {
   }
 
   get search() {
+    const main = this;
     return {
       /**
        * Searching about any word in the Quran.
@@ -71,17 +72,24 @@ class QuranText extends BaseQuranText {
 - 2.1 If you want search in all editions for the same language choose `language`
 - 2.2 If you want search in the edition you already choose it: choose `edition`
        * @param {string} keyword 
-       * @param {import("../types/quran").SurahNames | number} surah 
+       * @param {import("../types/quran").SurahNames | number | "random" | "all"} surah 
        * @param {"language" | "edition"} type 
        */
       async keyword(keyword, surah, type) {
-        return;
+        return await main.searchKeyword(keyword, surah, type);
       },
       /**
-       *
+        Search about anything in Quran but by a advanced options. That make you control all search options.
+        - You can choose the domain and the edition(Identifier)/language(ar, en, etc..).
        * @param {import("../types/quran").SearchTextAdvancedOptions} options
+       * @default options.domain : "api.alquran.cloud";
+       * @default options.type : "ar";
+       * @default options.surah : "random";
+       * @default options.keyword : "الله";
        */
-      async keyword(options) {},
+      async advanced(options) {
+        return await main.searchKeywordAdv(options);
+      },
     };
   }
 }

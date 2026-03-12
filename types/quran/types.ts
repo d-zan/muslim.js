@@ -13,6 +13,7 @@ export type QuranAPIDomains =
   | "api.alquran.cloud"
   | "alquran.api.islamic.network"
   | "alquran.api.alislam.ru";
+  
 export interface QuranAdvancedOptions {
   domain: QuranAPIDomains;
 }
@@ -22,9 +23,10 @@ export interface JuzAdvancedOptions {
   identifier: QuranIdentifierText;
   number: number | "random";
 }
+
 export interface SearchTextAdvancedOptions {
   domain: QuranAPIDomains;
   type: QuranLanguageText | QuranIdentifierText;
   keyword: string;
-  surah: SurahNames | number | "random";
+  surah: SurahNames | number | "random" | "all";
 }
