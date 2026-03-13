@@ -54,7 +54,7 @@ class BaseQuranText {
    * @private
    */
   async getJuz(juz) {
-    const help = new BaseQuranTextHelp();
+    const help = this.help;
     if (typeof juz === "string" && juz === "random") {
       const juzhelp = help.juzHelpV1(juz, this);
       const json = await juzhelp.json;
@@ -106,30 +106,27 @@ class BaseQuranText {
     }
   }
   /**
-   * @param {import("../types/quran/").SurahNames | number} surah - The Surah name or the number.
+   * @param {import("../types/quran/").SurahNames | number} surah
    * @private
    */
   async getSurah(surah) {
     if (typeof surah === "number") {
-      if (surah > 114) {
+      if (surah < 1 || surah > 30) {
         throw new BaseQuranTextError(
-          "[MAX_VALUE]: The max number value of 'surah' is 114.",
+          "[SURAH_NUMBER_VALUE]: The number value of 'surah' must be between 1 to 30.",
         );
       }
-      if (surah < 1) {
-        throw new BaseQuranTextError(
-          "[MIN_VALUE]: The min number value of 'surah' is 1.",
-        );
-      }
-      const content = `${surah}/${this.edition}`;
-      const json = await quranAPIData(this.domain, "v1", "surah", content);
-      const res = await quranAPI(this.domain, "v1", "surah", content);
+      const help = this.help.surahHelpV1(surah, this);
+      const json = await help.json;
+      const res = await help.res;
 
       if (!res.ok && typeof json.data === "string") {
         throw new AlQuranCloudAPIError(
           `(${json.code})[${json.status}]: ${json.data}`,
         );
-      } else if (res.ok && typeof json.data === "object") return json.data;
+      } else if (res.ok && typeof json.data === "object") {
+        return json.data;
+      }
     } else if (typeof surah === "string") {
       const surahNumber = SurahNumberByName[surah];
       if (!surahNumber) {
@@ -137,9 +134,9 @@ class BaseQuranText {
           "The string value of 'surah' doesn't match the types values. Please try again with a correct string from package.",
         );
       }
-      const content = `${surahNumber}/${this.edition}`;
-      const json = await quranAPIData(this.domain, "v1", "surah", content);
-      const res = await quranAPI(this.domain, "v1", "surah", content);
+      const help = this.help.surahHelpV1(surah, this);
+      const json = await help.json;
+      const res = await help.res;
 
       if (!res.ok && typeof json.data === "string") {
         throw new AlQuranCloudAPIError(
@@ -280,7 +277,7 @@ class BaseQuranText {
     if (!options) options = defaultOptions;
     else options = options;
     const { surah, type, domain, keyword } = options;
-
+    const ifSurahIsStrinfAndNotRandomAndNotAll = typeof surah === "string" && surah !== "random" && surah !== "all";
     if (typeof surah === "number") {
       const number = surah;
       if (number < 1 || number > 114) {
@@ -299,11 +296,7 @@ class BaseQuranText {
       } else if (res.ok && typeof data === "object") return data;
 
       //SurahNames
-    } else if (
-      typeof surah === "string" &&
-      surah !== "random" &&
-      surah !== "all"
-    ) {
+    } else if (ifSurahIsStrinfAndNotRandomAndNotAll) {
       const number = SurahNumberByName[surah];
       if (!number) {
         throw new BaseQuranTextError(
