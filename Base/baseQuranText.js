@@ -1,6 +1,3 @@
-//const { time, timeEnd } = require("console");
-//const identifierByName = require("../Tools/identifierByName");
-//const SurahNumberByName = require("../Tools/SurahNumberByName");
 const { quranAPIData, quranAPI } = require("../Function");
 const { randomInt } = require("crypto");
 const {
@@ -9,6 +6,7 @@ const {
   identifierByName,
   SurahNumberByName,
 } = require("../Tools");
+const BaseQuranTextHelp = require("../Help/BaseQuranTextHelp");
 
 class BaseQuranText {
   /**
@@ -20,6 +18,7 @@ class BaseQuranText {
   constructor(language, quran, options) {
     this.quran = quran;
     this.language = language;
+    this.help = new BaseQuranTextHelp();
     if (options) {
       /** @private */
       this.thereAOption = true;
@@ -55,25 +54,18 @@ class BaseQuranText {
    * @private
    */
   async getJuz(juz) {
+    const help = new BaseQuranTextHelp();
     if (typeof juz === "string" && juz === "random") {
-      const number = randomInt(1, 30);
-      const res = await quranAPI(
-        this.domain,
-        "v1",
-        "juz",
-        number + "/" + this.edition,
-      );
-      const json = await quranAPIData(
-        this.domain,
-        "v1",
-        "juz",
-        number + "/" + this.edition,
-      );
-      if (!res.ok && typeof json.data === "string") {
-        throw new AlQuranCloudAPIError(
-          `(${json.code})[${json.status}]: ${json.data}`,
-        );
-      } else if (res.ok && typeof json.data === "object") return json.data;
+      const juzhelp = help.juzHelpV1(juz, this);
+      const json = await juzhelp.json;
+      const res = await juzhelp.res;
+      const { data, code, status } = json;
+
+      if (!res.ok && typeof data === "string") {
+        throw new AlQuranCloudAPIError(`(${code})[${status}]: ${data}`);
+      } else if (res.ok && typeof data === "object") {
+        return data;
+      }
     } else if (typeof juz === "number") {
       if (!juz) {
         throw new BaseQuranTextError(
@@ -82,62 +74,34 @@ class BaseQuranText {
       }
       if (juz < 1 || juz > 30) {
         throw new BaseQuranTextError(
-          "[JUZ_NUMBER_VALUE]: The min value of 'juz_number' is 1 and the max value is 30.",
+          "[JUZ_NUMBER_VALUE]: The number value of 'juz' must be between 1 to 30.",
         );
       }
-      const number = juz;
-      const res = await quranAPI(
-        this.domain,
-        "v1",
-        "juz",
-        number + "/" + this.edition,
-      );
-      const json = await quranAPIData(
-        this.domain,
-        "v1",
-        "juz",
-        number + "/" + this.edition,
-      );
-      if (!res.ok && typeof json.data === "string") {
-        throw new AlQuranCloudAPIError(
-          `(${json.code})[${json.status}]: ${json.data}`,
-        );
-      } else if (res.ok && typeof json.data === "object") return json.data;
+
+      const juzhelp = help.juzHelpV1(juz, this);
+      const json = await juzhelp.json;
+      const res = await juzhelp.res;
+      const { data, code, status } = json;
+
+      if (!res.ok && typeof data === "string") {
+        throw new AlQuranCloudAPIError(`(${code})[${status}]: ${data}`);
+      } else if (res.ok && typeof data === "object") {
+        return data;
+      }
     } else if (typeof juz === "object") {
-      let domain = "api.alquran.cloud";
-      let identifier = "quran-uthmani-quran-academy";
-      let number = randomInt(1, 30);
-      if (juz.domain) {
-        domain = juz.domain;
+      const juzhelp = help.juzHelpV1(juz, this);
+      const json = await juzhelp.json;
+      const res = await juzhelp.res;
+      const { data, code, status } = json;
+
+      if (!res.ok && typeof data === "string") {
+        throw new AlQuranCloudAPIError(`(${code})[${status}]: ${data}`);
+      } else if (res.ok && typeof data === "object") {
+        return data;
       }
-      if (juz.identifier) {
-        identifier = juz.identifier;
-      }
-      if (juz.number && typeof juz.number === "number") {
-        number = juz.number;
-      } else if (typeof juz.number === "string" && juz.number === "random") {
-        number = randomInt(1, 30);
-      }
-      const res = await quranAPI(
-        domain,
-        "v1",
-        "juz",
-        number + "/" + identifier,
-      );
-      const json = await quranAPIData(
-        domain,
-        "v1",
-        "juz",
-        number + "/" + identifier,
-      );
-      if (!res.ok && typeof json.data === "string") {
-        throw new AlQuranCloudAPIError(
-          `(${json.code})[${json.status}]: ${json.data}`,
-        );
-      } else if (res.ok && typeof json.data === "object") return json.data;
     } else {
       throw new BaseQuranTextError(
-        "[JUZ_ERROR]: The value of 'juz' must be number between 1 to 30 or string('random'). or advanced object",
+        "[JUZ_ERROR]: The value of 'juz' must be number between 1 to 30, string 'random', advanced object.",
       );
     }
   }
